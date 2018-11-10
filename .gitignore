@@ -1,3 +1,16 @@
+#################
+## Eclipse
+#################
+*.classpath
+*.project
+*.settings
+*/target/**
+/target/
+/bin/**
+
+#################
+## Java
+#################
 # Compiled class file
 *.class
 
