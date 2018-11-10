@@ -72,5 +72,29 @@ public class Types {
         return paramTypes;
     }
     
+    /**
+     * Copy pasted from Gunnor Mörling's blog: http://in.relation.to/2016/04/14/emulating-property-literals-with-java-8-method-references/
+     */
+    private static String getPropertyName(Method method) {
+        final boolean hasGetterSignature = method.getParameterTypes().length == 0 && method.getReturnType() != null;
+
+        String name = method.getName();
+        String propName = null;
+
+        if ( hasGetterSignature ) {
+            if ( name.startsWith( "get" ) && hasGetterSignature ) {
+                propName = name.substring( 3, 4 ).toLowerCase() + name.substring( 4 );
+            }
+            else if ( name.startsWith( "is" ) && hasGetterSignature ) {
+                propName = name.substring( 2, 3 ).toLowerCase() + name.substring( 3 );
+            }
+        }
+        else {
+            throw new RuntimeException( "Only property getter methods are expected to be passed" );
+        }
+
+        return propName;
+    }
+    
     
 }

@@ -34,7 +34,7 @@ public class SignatureUtil {
         tl.set(value); 
     } 
  
-    private static ThreadLocal<Integer> consumed_chars = new ThreadLocal<>() { 
+    private static ThreadLocal<Integer> consumed_chars = new ThreadLocal() { 
  
         protected Integer initialValue() { 
             return 0; 
