@@ -10,8 +10,6 @@ Simply provide a [method reference](https://docs.oracle.com/javase/tutorial/java
     Method m3 = Types.getDeclaredMethod(BufferedReader::readLine); // Get method that throws checked exception
     Method m4 = Types.<String, Class[]> getDeclaredMethod(getClass()::getDeclaredMethod); //to get vararg method you must specify parameters in generics
     Method m5 = Types.<String>getDeclaredMethod(Class::forName); // to get overloaded method you must specify parameters in generics
-    Method m6 = Types.<Set>getDeclaredMethod(new HashMap()::entrySet);
-    Method m7 = Types.<Method[]>getDeclaredMethod(getClass()::getDeclaredMethods);
 
 Notice that you have to provide the method parameters in generics under certain circumstances (When the method is overloaded, or if the method has a varargs parameter).    
     
