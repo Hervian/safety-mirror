@@ -34,6 +34,7 @@ public class SignatureUtil {
         tl.set(value); 
     } 
  
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     private static ThreadLocal<Integer> consumed_chars = new ThreadLocal() { 
  
         protected Integer initialValue() { 
