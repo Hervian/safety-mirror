@@ -21,14 +21,15 @@ public class Types {
     public @FunctionalInterface static interface SextConsumer<T1, T2, T3, T4, T5, T6> extends SuperConsumer { void getDeclaredMethod(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)  throws Exception; }
     
     
-    public static <T1> Method getDeclaredMethod(Supplier<T1> consumer) { return getDeclaredMethodFromSuperConsumer(consumer); }
-    public static <T1> Method getDeclaredMethod(Consumer<T1> consumer) { return getDeclaredMethodFromSuperConsumer(consumer); }
-    public static <T1, T2> Method getDeclaredMethod(BiConsumer<T1, T2> consumer) { return getDeclaredMethodFromSuperConsumer(consumer); }
-    public static <T1, T2, T3> Method getDeclaredMethod(TriConsumer<T1, T2, T3> consumer) { return getDeclaredMethodFromSuperConsumer(consumer); }
-    public static <T1, T2, T3, T4> Method getDeclaredMethod(QuadConsumer<T1, T2, T3, T4> consumer) { return getDeclaredMethodFromSuperConsumer(consumer); }
-    public static <T1, T2, T3, T4, T5> Method getDeclaredMethod(PentaConsumer<T1, T2, T3, T4, T5> consumer) { return getDeclaredMethodFromSuperConsumer(consumer); }
-    public static <T1, T2, T3, T4, T5, T6> Method getDeclaredMethod(SextConsumer<T1, T2, T3, T4, T5, T6> consumer) { return getDeclaredMethodFromSuperConsumer(consumer); }
+    public static <T1> Method createMethod(Supplier<T1> consumer) { return createMethodFromSuperConsumer(consumer); }
+    public static <T1> Method createMethod(Consumer<T1> consumer) { return createMethodFromSuperConsumer(consumer); }
+    public static <T1, T2> Method createMethod(BiConsumer<T1, T2> consumer) { return createMethodFromSuperConsumer(consumer); }
+    public static <T1, T2, T3> Method createMethod(TriConsumer<T1, T2, T3> consumer) { return createMethodFromSuperConsumer(consumer); }
+    public static <T1, T2, T3, T4> Method createMethod(QuadConsumer<T1, T2, T3, T4> consumer) { return createMethodFromSuperConsumer(consumer); }
+    public static <T1, T2, T3, T4, T5> Method createMethod(PentaConsumer<T1, T2, T3, T4, T5> consumer) { return createMethodFromSuperConsumer(consumer); }
+    public static <T1, T2, T3, T4, T5, T6> Method createMethod(SextConsumer<T1, T2, T3, T4, T5, T6> consumer) { return createMethodFromSuperConsumer(consumer); }
 
+    
     
 //    public static <T1> Property getProperty(Consumer<T1> consumer) {
 //        Method method = getDeclaredMethodFromSuperConsumer(consumer); 
@@ -39,7 +40,7 @@ public class Types {
     /**
      * Thanks to Holger for this StackOverflow answer: https://stackoverflow.com/a/21879031/6095334
      */
-    private static Method getDeclaredMethodFromSuperConsumer(SuperConsumer lambda) {
+    private static Method createMethodFromSuperConsumer(SuperConsumer lambda) {
         for (Class<?> cl = lambda.getClass(); cl != null; cl = cl.getSuperclass()) {
             try {
                 Method m = cl.getDeclaredMethod("writeReplace");
@@ -48,6 +49,7 @@ public class Types {
                 if (!(replacement instanceof SerializedLambda))
                     break;// custom interface implementation
                 SerializedLambda l = (SerializedLambda) replacement;
+                
                 String className = SignatureUtil.compactClassName(l.getImplClass(), false);
                 return Class.forName(className).getDeclaredMethod(l.getImplMethodName(), getParameters(l.getImplMethodSignature()));
             } catch (NoSuchMethodException e) {
