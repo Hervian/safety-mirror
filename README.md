@@ -15,3 +15,5 @@ Simply provide a [method reference](https://docs.oracle.com/javase/tutorial/java
 Notice that you have to provide the method parameters in generics under certain circumstances (When the method is overloaded, or if the method has a varargs parameter).    
     
 Note that the project requires Java 8 or above.
+
+Note also, that since this project is not in any Maven repo you must use [JitPack](https://jitpack.io/) to add the dependency.
