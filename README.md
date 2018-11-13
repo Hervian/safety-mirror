@@ -16,4 +16,9 @@ Notice that you have to provide the method parameters in generics under certain 
     
 Note that the project requires Java 8 or above.
 
-Note also, that since this project is not in any Maven repo you must use [JitPack](https://jitpack.io/) to add the dependency.
+## Dependency Management
+
+Since this project is not in any Maven repo you must use [JitPack](https://jitpack.io/) to add the dependency.
+
+## Related projects
+See [lambda-factory](https://github.com/Hervian/lambda-factory), which makes your Method invocations as fast as direct method invocation.
