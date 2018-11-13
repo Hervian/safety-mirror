@@ -29,18 +29,32 @@ public class Types {
     public static <T1, T2, T3, T4, T5> Method createMethod(PentaConsumer<T1, T2, T3, T4, T5> consumer) { return createMethodFromSuperConsumer(consumer); }
     public static <T1, T2, T3, T4, T5, T6> Method createMethod(SextConsumer<T1, T2, T3, T4, T5, T6> consumer) { return createMethodFromSuperConsumer(consumer); }
 
-    
-    
-//    public static <T1> Property getProperty(Consumer<T1> consumer) {
-//        Method method = getDeclaredMethodFromSuperConsumer(consumer); 
-//        Field
-//    }
-    
+    public static <T1> String getName(Supplier<T1> consumer) { return createMethodNameFromSuperConsumer(consumer); }
+    public static <T1> String getName(Consumer<T1> consumer) { return createMethodNameFromSuperConsumer(consumer); }
+    public static <T1, T2> String getName(BiConsumer<T1, T2> consumer) { return createMethodNameFromSuperConsumer(consumer); }
+    public static <T1, T2, T3> String getName(TriConsumer<T1, T2, T3> consumer) { return createMethodNameFromSuperConsumer(consumer); }
+    public static <T1, T2, T3, T4> String getName(QuadConsumer<T1, T2, T3, T4> consumer) { return createMethodNameFromSuperConsumer(consumer); }
+    public static <T1, T2, T3, T4, T5> String getName(PentaConsumer<T1, T2, T3, T4, T5> consumer) { return createMethodNameFromSuperConsumer(consumer); }
+    public static <T1, T2, T3, T4, T5, T6> String getName(SextConsumer<T1, T2, T3, T4, T5, T6> consumer) { return createMethodNameFromSuperConsumer(consumer); }
     
     /**
      * Thanks to Holger for this StackOverflow answer: https://stackoverflow.com/a/21879031/6095334
      */
     private static Method createMethodFromSuperConsumer(SuperConsumer lambda) {
+    	SerializedLambda serializedLambda = getSerializedLambda(lambda);
+        if (serializedLambda==null) {
+        	return null;
+        } else {        	
+        	String className = SignatureUtil.compactClassName(serializedLambda.getImplClass(), false);
+        	try {
+				return Class.forName(className).getDeclaredMethod(serializedLambda.getImplMethodName(), getParameters(serializedLambda.getImplMethodSignature()));
+			} catch (NoSuchMethodException | SecurityException | ClassNotFoundException e) {
+				throw new RuntimeException(e);
+			}
+        }
+    }
+	private static SerializedLambda getSerializedLambda(SuperConsumer lambda) {
+		SerializedLambda serializedLambda = null;
         for (Class<?> cl = lambda.getClass(); cl != null; cl = cl.getSuperclass()) {
             try {
                 Method m = cl.getDeclaredMethod("writeReplace");
@@ -48,22 +62,19 @@ public class Types {
                 Object replacement = m.invoke(lambda);
                 if (!(replacement instanceof SerializedLambda))
                     break;// custom interface implementation
-                SerializedLambda l = (SerializedLambda) replacement;
-                
-                String className = SignatureUtil.compactClassName(l.getImplClass(), false);
-                return Class.forName(className).getDeclaredMethod(l.getImplMethodName(), getParameters(l.getImplMethodSignature()));
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
+                serializedLambda = (SerializedLambda) replacement;
                 break;
-            } catch (SecurityException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+            } catch (IllegalAccessException | InvocationTargetException | SecurityException e) {
+            	throw new RuntimeException(e);
             }
         }
-        return null;
+		return serializedLambda;
+	}
+    
+    private static String createMethodNameFromSuperConsumer(SuperConsumer lambda) {
+    	SerializedLambda serializedLambda = getSerializedLambda(lambda);
+    	return serializedLambda.getImplMethodName();
     }
     
     private static Class<?>[] getParameters(String signature) throws ClassNotFoundException {
@@ -77,31 +88,6 @@ public class Types {
         }
         return paramTypes;
     }
-    
-    /**
-     * Copy pasted from Gunnor Mörling's blog: http://in.relation.to/2016/04/14/emulating-property-literals-with-java-8-method-references/
-     */
-    private static String getPropertyName(Method method) {
-        final boolean hasGetterSignature = method.getParameterTypes().length == 0 && method.getReturnType() != null;
-
-        String name = method.getName();
-        String propName = null;
-
-        if ( hasGetterSignature ) {
-            if ( name.startsWith( "get" ) && hasGetterSignature ) {
-                propName = name.substring( 3, 4 ).toLowerCase() + name.substring( 4 );
-            }
-            else if ( name.startsWith( "is" ) && hasGetterSignature ) {
-                propName = name.substring( 2, 3 ).toLowerCase() + name.substring( 3 );
-            }
-        }
-        else {
-            throw new RuntimeException( "Only property getter methods are expected to be passed" );
-        }
-
-        return propName;
-    }
-    
     
     
 }

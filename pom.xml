@@ -4,11 +4,11 @@
 
   <groupId>com.github.hervian</groupId>
   <artifactId>safety-mirror</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0</version>
   <packaging>jar</packaging>
 
   <name>safety-mirror</name>
-  <url>http://maven.apache.org</url>
+  <url>https://github.com/Hervian/safety-mirror</url>
   
   <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
