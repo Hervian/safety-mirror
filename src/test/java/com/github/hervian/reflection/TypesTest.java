@@ -27,14 +27,22 @@ public class TypesTest {
     
     @Test
     public void testGetName() throws Throwable {
+        assertEquals("concatenate", Types.getName(NestedClass::concatenate));
         assertEquals("isEmpty", Types.getName(String::isEmpty));
         assertEquals("readLine", Types.getName(BufferedReader::readLine));
         assertEquals("isAlive", Types.getName(Thread::isAlive));
-        assertEquals("getDeclaredMethod", Types.<String, Class[]>getName(getClass()::getDeclaredMethod));  //lambda$16 -> Holger, on SO: "The limitations are that it will print not very useful method references for lambda expressions (references to the synthetic method containing the lambda code)" https://stackoverflow.com/a/21879031/6095334
+//        assertEquals("getDeclaredMethod", Types.<String, Class[]>getName(HashMap.class::getDeclaredMethod)); 
+//        assertEquals("getDeclaredMethod", Types.<String, Class[]>getName(getClass()::getDeclaredMethod));  //lambda$16 -> Holger, on SO: "The limitations are that it will print not very useful method references for lambda expressions (references to the synthetic method containing the lambda code)" https://stackoverflow.com/a/21879031/6095334
+        assertEquals("getDeclaredField", Types.getName(getClass()::getDeclaredField));
         assertEquals("forName", Types.<String>getName(Class::forName));
         assertEquals("toString", Types.getName(this::toString));
     }
     
+    public static class NestedClass {
+        public String concatenate(String str1, String str2) {
+            return str1 + str2;
+        }
+    }
     
 
 }

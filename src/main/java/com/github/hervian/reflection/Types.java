@@ -79,12 +79,7 @@ public class Types {
     
     private static String createMethodNameFromSuperConsumer(SuperConsumer lambda) {
     	SerializedLambda serializedLambda = getSerializedLambda(lambda);
-    	String serializedLambdaImplMethodName = serializedLambda.getImplMethodName();
-    	if (!serializedLambdaImplMethodName.startsWith("lambda$")) {    		
-    		return serializedLambdaImplMethodName;
-    	} else {
-    		return serializedLambda.getFunctionalInterfaceMethodName();
-    	}
+    	return serializedLambda.getImplMethodName();
     }
     
     private static Class<?>[] getParameters(String signature) throws ClassNotFoundException {
