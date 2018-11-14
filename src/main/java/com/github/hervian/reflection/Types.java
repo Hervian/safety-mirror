@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.lang.invoke.SerializedLambda;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.List;
 
 import com.github.hervian.reflection.util.SignatureUtil;
 
@@ -42,7 +44,10 @@ public class Types {
      */
     private static Method createMethodFromSuperConsumer(SuperConsumer lambda) {
     	SerializedLambda serializedLambda = getSerializedLambda(lambda);
-        if (serializedLambda==null) {
+        return getMethod(serializedLambda);
+    }
+	private static Method getMethod(SerializedLambda serializedLambda) {
+		if (serializedLambda==null) {
         	return null;
         } else {        	
         	String className = SignatureUtil.compactClassName(serializedLambda.getImplClass(), false);
@@ -52,7 +57,7 @@ public class Types {
 				throw new RuntimeException(e);
 			}
         }
-    }
+	}
 	private static SerializedLambda getSerializedLambda(SuperConsumer lambda) {
 		SerializedLambda serializedLambda = null;
         for (Class<?> cl = lambda.getClass(); cl != null; cl = cl.getSuperclass()) {
@@ -74,7 +79,12 @@ public class Types {
     
     private static String createMethodNameFromSuperConsumer(SuperConsumer lambda) {
     	SerializedLambda serializedLambda = getSerializedLambda(lambda);
-    	return serializedLambda.getImplMethodName();
+    	String serializedLambdaImplMethodName = serializedLambda.getImplMethodName();
+    	if (!serializedLambdaImplMethodName.startsWith("lambda$")) {    		
+    		return serializedLambdaImplMethodName;
+    	} else {
+    		return serializedLambda.getFunctionalInterfaceMethodName();
+    	}
     }
     
     private static Class<?>[] getParameters(String signature) throws ClassNotFoundException {
