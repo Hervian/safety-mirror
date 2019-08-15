@@ -1,3 +1,5 @@
+Edit: This library have various shortcomings which I am slowly becoming aware of. See fx this Stackoverflow answer: [How to get the name of the method resulting from a lambda](https://stackoverflow.com/q/47313521/6095334)
+
 # safety-mirror
 Type safe Java Reflection
 
