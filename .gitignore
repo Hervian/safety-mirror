@@ -9,6 +9,15 @@
 /bin/**
 
 #################
+# IntelliJ IDEA #
+#################
+*.iws
+*.iml
+*.ipr
+.idea
+atlassian-ide-plugin.xml
+
+#################
 ## Java
 #################
 # Compiled class file
