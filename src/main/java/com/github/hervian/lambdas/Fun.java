@@ -86,7 +86,11 @@ public interface Fun<RETURN> extends Serializable {
         }
     }
 
-    // TODO: add javadoc: Any return type will match the *AndVoid method / the void return type:
+    /**
+     * Use the special *AndVoid subclasses for matching methods that return lower case void.
+     * Do note, though, that the *AndVoid interfaces will match any return type.
+     * @param <DUMMY> A note on the DUMMY generic value: It was the only way to make the following jUnit assert pass: assertNotNull(Types2.<String, Class<?>[]>createMethod(getClass()::getDeclaredMethod)); See comment in DelegateTest
+     */
     @FunctionalInterface
     interface With0ParamsAndVoid<DUMMY> extends Fun<Void> { // A note on the DUMMY generic value: It was the only way to make the following jUnit assert pass: assertNotNull(Types2.<String, Class<?>[]>createMethod(getClass()::getDeclaredMethod)); See comment in DelegateTest
         void invoke()  throws Exception;
@@ -107,6 +111,9 @@ public interface Fun<RETURN> extends Serializable {
         }
     }
 
+    /**
+     * @see With0ParamsAndVoid
+     */
     @FunctionalInterface
     interface With1ParamAndVoid<PARAM1> extends Fun<Void> {
         void invoke(PARAM1 param1)  throws Exception;
@@ -127,6 +134,9 @@ public interface Fun<RETURN> extends Serializable {
         }
     }
 
+    /**
+     * @see With0ParamsAndVoid
+     */
     @FunctionalInterface
     interface With2ParamsAndVoid<PARAM1, PARAM2> extends Fun<Void> {
         void invoke(PARAM1 param1, PARAM2 param2)  throws Exception;
@@ -147,6 +157,9 @@ public interface Fun<RETURN> extends Serializable {
         }
     }
 
+    /**
+     * @see With0ParamsAndVoid
+     */
     @FunctionalInterface
     interface With3ParamsAndVoid<PARAM1, PARAM2, PARAM3> extends Fun<Void> {
         void invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3)  throws Exception;
@@ -167,6 +180,9 @@ public interface Fun<RETURN> extends Serializable {
         }
     }
 
+    /**
+     * @see With0ParamsAndVoid
+     */
     @FunctionalInterface
     interface With4ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4> extends Fun<Void> {
         void invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4)  throws Exception;
@@ -187,6 +203,9 @@ public interface Fun<RETURN> extends Serializable {
         }
     }
 
+    /**
+     * @see With0ParamsAndVoid
+     */
     @FunctionalInterface
     interface With5ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5> extends Fun<Void> {
         void invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5)  throws Exception;
@@ -207,6 +226,9 @@ public interface Fun<RETURN> extends Serializable {
         }
     }
 
+    /**
+     * @see With0ParamsAndVoid
+     */
     @FunctionalInterface
     interface With6ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6> extends Fun<Void> {
         void invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6)  throws Exception;
@@ -227,6 +249,9 @@ public interface Fun<RETURN> extends Serializable {
         }
     }
 
+    /**
+     * @see With0ParamsAndVoid
+     */
     @FunctionalInterface
     interface With7ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7> extends Fun<Void> {
         void invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7)  throws Exception;
@@ -247,6 +272,9 @@ public interface Fun<RETURN> extends Serializable {
         }
     }
 
+    /**
+     * @see With0ParamsAndVoid
+     */
     @FunctionalInterface
     interface With8ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7, PARAM8> extends Fun<Void> {
         void invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8)  throws Exception;
@@ -267,6 +295,9 @@ public interface Fun<RETURN> extends Serializable {
         }
     }
 
+    /**
+     * @see With0ParamsAndVoid
+     */
     @FunctionalInterface
     interface With9ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7, PARAM8, PARAM9> extends Fun<Void> {
         void invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8, PARAM9 param9)  throws Exception;

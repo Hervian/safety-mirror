@@ -2,8 +2,10 @@ package com.github.hervian.lambdas;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.Singular;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -26,14 +28,24 @@ import java.util.List;
  * @author Anders Granau Høfft
  */
 @Builder
-@Data
 public class DelegateInvocationResult<RESULT> {
+
+    @Getter
+    private boolean oneOrMoreExceptionsThrown;
 
     @Singular
     private List<FunctionInvocationResult<RESULT>> functionInvocationResults; //TODO: Return immutable copy in the getter?
 
     public FunctionInvocationResult<RESULT> get(int index){
         return getFunctionInvocationResults().get(index);
+    }
+
+    /*public boolean oneOrMoreExceptionsThrown(){
+        return oneOrMoreExceptionsThrown;
+    }*/
+
+    public List<FunctionInvocationResult<RESULT>> getFunctionInvocationResults(){
+        return Collections.unmodifiableList(functionInvocationResults);
     }
 
 }

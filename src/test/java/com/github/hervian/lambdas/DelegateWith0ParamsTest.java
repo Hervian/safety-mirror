@@ -1,6 +1,10 @@
 package com.github.hervian.lambdas;
 
 import org.junit.Test;
+import org.w3c.dom.ls.LSOutput;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 
@@ -95,17 +99,22 @@ public class DelegateWith0ParamsTest extends AbstractDelegateTest {
         compile("Delegate.With0Params<Double>", "this::doubleMethod", "this::intMethod");
     }
 
-    @Test
-    public void deleteme(){
-        Fun.With0Params<String> myFunction = "   hello world  "::trim;
-     Delegate.With0Params myDelegate = new Delegate.With0Params(myFunction);
-     myDelegate.remove(myFunction);
-    }
-
     @Override
     protected DelegateType getDelegateType() {
         return DelegateType.With0Params;
     }
+
+    public static void main(String[] args){
+        Delegate.With1Param<String, String> greetingsDelegate = new Delegate.With1Param<>();
+        greetingsDelegate.add(str -> "Hello " + str);
+        greetingsDelegate.add(str -> "Goodbye " + str);
+
+        DelegateInvocationResult<String> invocationResult = greetingsDelegate.invokeAndAggregateExceptions("Sir");
+
+        invocationResult.getFunctionInvocationResults().forEach(funInvRes -> System.out.println(funInvRes.getResult()));
+        //prints: "Hello sir" and "Goodbye Sir"
+    }
+
 
 
 }

@@ -25,7 +25,7 @@ import java.util.List;
  * </pre>
  * @author Anders Granau Høfft
  */
-public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> { //TODO: Rename to Delegate (and fix the Lombok Delegate annotation examples accordingly by using FQCN for the Lombok anno to anoid name clash.
+public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
 
     private List<METHOD_REF> methodRefs = new LinkedList<>();
     public enum InvocationStrategy {
@@ -33,7 +33,11 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> { //TODO:
         CATCH_AND_AGGREGATE_EXCEPTIONS;
     }
 
-    public Delegate(METHOD_REF[] methodRefs) { //TODO: How to handle null values in array - ignore, as now, or throw exception?
+    /**
+     * Please notice that null entries are simply ignored/discarded.
+     * @param methodRefs
+     */
+    public Delegate(METHOD_REF[] methodRefs) {
         add(methodRefs);
     }
 
@@ -57,10 +61,10 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> { //TODO:
         return invokeMethodReferences(invocationStrategy, args);
     }
 
-
     //TODO: Synchronous vs Asynchronous raising? See C# guide: https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/events/
     private DelegateInvocationResult<RETURN> invokeMethodReferences(InvocationStrategy invocationStrategy, Object... args) throws Exception {
         DelegateInvocationResult.DelegateInvocationResultBuilder delegateInvocationResultBuilder = DelegateInvocationResult.builder();
+        boolean oneOrMoreExceptionsThrown = false;
         for (METHOD_REF m : getMethodRefs()) {
             FunctionInvocationResult.FunctionInvocationResultBuilder builder = FunctionInvocationResult.builder();
             builder.method(m.toMethod());
@@ -68,14 +72,17 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> { //TODO:
                 Object result = invoke(m, args);
                 builder.result(result);
             } catch (Exception e) {
+                oneOrMoreExceptionsThrown = true;
                 if (InvocationStrategy.THROW_EXCEPTIONS == invocationStrategy) {
                     throw e;
                 } else {
                     builder.exception(e);
                 }
             }
+            delegateInvocationResultBuilder.oneOrMoreExceptionsThrown(oneOrMoreExceptionsThrown);
             delegateInvocationResultBuilder.functionInvocationResult(builder.build());
         }
+
         return delegateInvocationResultBuilder.build();
     }
 
@@ -156,6 +163,14 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> { //TODO:
             super(methodRefs);
         }
 
+        public DelegateInvocationResult<RETURN> invoke() throws Exception {
+            return super.invoke();
+        }
+
+        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions() {
+            return super.invokeAndAggregateExceptions();
+        }
+
         @Override
         protected RETURN invoke(Fun.With0Params<RETURN> function, Object... args) throws Exception {
             return function.invoke();
@@ -166,6 +181,14 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> { //TODO:
     public static class With0ParamsAndVoid extends Delegate<Void, Fun.With0ParamsAndVoid<?>> {
         public With0ParamsAndVoid(Fun.With0ParamsAndVoid... methodRefs) {
             super(methodRefs);
+        }
+
+        public DelegateInvocationResult<Void> invoke() throws Exception {
+            return super.invoke();
+        }
+
+        public DelegateInvocationResult<Void> invokeAndAggregateExceptions() {
+            return super.invokeAndAggregateExceptions();
         }
 
         @Override
@@ -181,6 +204,14 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> { //TODO:
             super(methodRefs);
         }
 
+        public DelegateInvocationResult<RETURN> invoke(PARAM1 param1) throws Exception {
+            return super.invoke(param1);
+        }
+
+        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(PARAM1 param1) {
+            return super.invokeAndAggregateExceptions(param1);
+        }
+
         @Override
         protected RETURN invoke(Fun.With1Param<RETURN, PARAM1> function, Object... args) throws Exception {
             return function.invoke(args==null ? null : (PARAM1)args[0]);
@@ -190,6 +221,14 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> { //TODO:
     public static class With1ParamAndVoid<PARAM1> extends Delegate<Void, Fun.With1ParamAndVoid<PARAM1>> {
         public With1ParamAndVoid(Fun.With1ParamAndVoid<PARAM1>... methodRefs) {
             super(methodRefs);
+        }
+
+        public DelegateInvocationResult<Void> invoke(PARAM1 param1) throws Exception {
+            return super.invoke(param1);
+        }
+
+        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(PARAM1 param1) {
+            return super.invokeAndAggregateExceptions(param1);
         }
 
         @Override
@@ -205,6 +244,14 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> { //TODO:
             super(methodRefs);
         }
 
+        public DelegateInvocationResult<RETURN> invoke(PARAM1 param1, PARAM2 param2) throws Exception {
+            return super.invoke(param1, param2);
+        }
+
+        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2) {
+            return super.invokeAndAggregateExceptions(param1, param2);
+        }
+
         @Override
         protected RETURN invoke(Fun.With2Params<RETURN, PARAM1, PARAM2> function, Object... args) throws Exception {
             return function.invoke(args==null ? null : (PARAM1)args[0], (PARAM2)args[1]);
@@ -214,6 +261,14 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> { //TODO:
     public static class With2ParamsAndVoid<PARAM1, PARAM2> extends Delegate<Void, Fun.With2ParamsAndVoid<PARAM1, PARAM2>> {
         public With2ParamsAndVoid(Fun.With2ParamsAndVoid<PARAM1 ,PARAM2>... methodRefs) {
             super(methodRefs);
+        }
+
+        public DelegateInvocationResult<Void> invoke(PARAM1 param1, PARAM2 param2) throws Exception {
+            return super.invoke(param1, param2);
+        }
+
+        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2) {
+            return super.invokeAndAggregateExceptions(param1, param2);
         }
 
         @Override
@@ -229,6 +284,14 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> { //TODO:
             super(methodRefs);
         }
 
+        public DelegateInvocationResult<RETURN> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3) throws Exception {
+            return super.invoke(param1, param2, param3);
+        }
+
+        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3) {
+            return super.invokeAndAggregateExceptions(param1, param2, param3);
+        }
+
         @Override
         protected RETURN invoke(Fun.With3Params<RETURN, PARAM1, PARAM2, PARAM3> function, Object... args) throws Exception {
             return function.invoke(args==null ? null : (PARAM1)args[0], (PARAM2)args[1], (PARAM3)args[2]);
@@ -238,6 +301,14 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> { //TODO:
     public static class With3ParamsAndVoid<PARAM1, PARAM2, PARAM3> extends Delegate<Void, Fun.With3ParamsAndVoid<PARAM1, PARAM2, PARAM3>> {
         public With3ParamsAndVoid(Fun.With3ParamsAndVoid<PARAM1 ,PARAM2, PARAM3>... methodRefs) {
             super(methodRefs);
+        }
+
+        public DelegateInvocationResult<Void> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3) throws Exception {
+            return super.invoke(param1, param2, param3);
+        }
+
+        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3) {
+            return super.invokeAndAggregateExceptions(param1, param2, param3);
         }
 
         @Override
@@ -253,6 +324,14 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> { //TODO:
             super(methodRefs);
         }
 
+        public DelegateInvocationResult<RETURN> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4) throws Exception {
+            return super.invoke(param1, param2, param3, param4);
+        }
+
+        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4) {
+            return super.invokeAndAggregateExceptions(param1, param2, param3, param4);
+        }
+
         @Override
         protected RETURN invoke(Fun.With4Params<RETURN, PARAM1, PARAM2, PARAM3, PARAM4> function, Object... args) throws Exception {
             return function.invoke(args==null ? null : (PARAM1)args[0], (PARAM2)args[1], (PARAM3)args[2], (PARAM4)args[3]);
@@ -262,6 +341,14 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> { //TODO:
     public static class With4ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4> extends Delegate<Void, Fun.With4ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4>> {
         public With4ParamsAndVoid(Fun.With4ParamsAndVoid<PARAM1 ,PARAM2, PARAM3, PARAM4>... methodRefs) {
             super(methodRefs);
+        }
+
+        public DelegateInvocationResult<Void> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4) throws Exception {
+            return super.invoke(param1, param2, param3, param4);
+        }
+
+        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4) {
+            return super.invokeAndAggregateExceptions(param1, param2, param3, param4);
         }
 
         @Override
@@ -277,6 +364,14 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> { //TODO:
             super(methodRefs);
         }
 
+        public DelegateInvocationResult<RETURN> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5) throws Exception {
+            return super.invoke(param1, param2, param3, param4, param5);
+        }
+
+        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5) {
+            return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5);
+        }
+
         @Override
         protected RETURN invoke(Fun.With5Params<RETURN, PARAM1, PARAM2, PARAM3, PARAM4, PARAM5> function, Object... args) throws Exception {
             return function.invoke(args==null ? null : (PARAM1)args[0], (PARAM2)args[1], (PARAM3)args[2], (PARAM4)args[3], (PARAM5)args[4]);
@@ -286,6 +381,14 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> { //TODO:
     public static class With5ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5> extends Delegate<Void, Fun.With5ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5>> {
         public With5ParamsAndVoid(Fun.With5ParamsAndVoid<PARAM1 ,PARAM2, PARAM3, PARAM4, PARAM5>... methodRefs) {
             super(methodRefs);
+        }
+
+        public DelegateInvocationResult<Void> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5) throws Exception {
+            return super.invoke(param1, param2, param3, param4, param5);
+        }
+
+        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5) {
+            return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5);
         }
 
         @Override
@@ -301,6 +404,14 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> { //TODO:
             super(methodRefs);
         }
 
+        public DelegateInvocationResult<RETURN> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6) throws Exception {
+            return super.invoke(param1, param2, param3, param4, param5, param6);
+        }
+
+        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6) {
+            return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5, param6);
+        }
+
         @Override
         protected RETURN invoke(Fun.With6Params<RETURN, PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6> function, Object... args) throws Exception {
             return function.invoke(args==null ? null : (PARAM1)args[0], (PARAM2)args[1], (PARAM3)args[2], (PARAM4)args[3], (PARAM5)args[4], (PARAM6)args[5]);
@@ -310,6 +421,14 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> { //TODO:
     public static class With6ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6> extends Delegate<Void, Fun.With6ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6>> {
         public With6ParamsAndVoid(Fun.With6ParamsAndVoid<PARAM1 ,PARAM2, PARAM3, PARAM4, PARAM5, PARAM6>... methodRefs) {
             super(methodRefs);
+        }
+
+        public DelegateInvocationResult<Void> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6) throws Exception {
+            return super.invoke(param1, param2, param3, param4, param5, param6);
+        }
+
+        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6) {
+            return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5, param6);
         }
 
         @Override
@@ -325,6 +444,14 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> { //TODO:
             super(methodRefs);
         }
 
+        public DelegateInvocationResult<RETURN> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7) throws Exception {
+            return super.invoke(param1, param2, param3, param4, param5, param6, param7);
+        }
+
+        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7) {
+            return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5, param6, param7);
+        }
+
         @Override
         protected RETURN invoke(Fun.With7Params<RETURN, PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7> function, Object... args) throws Exception {
             return function.invoke(args==null ? null : (PARAM1)args[0], (PARAM2)args[1], (PARAM3)args[2], (PARAM4)args[3], (PARAM5)args[4], (PARAM6)args[5], (PARAM7)args[6]);
@@ -334,6 +461,14 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> { //TODO:
     public static class With7ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7> extends Delegate<Void, Fun.With7ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7>> {
         public With7ParamsAndVoid(Fun.With7ParamsAndVoid<PARAM1 ,PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7>... methodRefs) {
             super(methodRefs);
+        }
+
+        public DelegateInvocationResult<Void> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7) throws Exception {
+            return super.invoke(param1, param2, param3, param4, param5, param6, param7);
+        }
+
+        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7) {
+            return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5, param6, param7);
         }
 
         @Override
@@ -349,6 +484,14 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> { //TODO:
             super(methodRefs);
         }
 
+        public DelegateInvocationResult<RETURN> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8) throws Exception {
+            return super.invoke(param1, param2, param3, param4, param5, param6, param7, param8);
+        }
+
+        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8) {
+            return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5, param6, param7, param8);
+        }
+
         @Override
         protected RETURN invoke(Fun.With8Params<RETURN, PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7, PARAM8> function, Object... args) throws Exception {
             return function.invoke(args==null ? null : (PARAM1)args[0], (PARAM2)args[1], (PARAM3)args[2], (PARAM4)args[3], (PARAM5)args[4], (PARAM6)args[5], (PARAM7)args[6], (PARAM8)args[7]);
@@ -358,6 +501,14 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> { //TODO:
     public static class With8ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7, PARAM8> extends Delegate<Void, Fun.With8ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7, PARAM8>> {
         public With8ParamsAndVoid(Fun.With8ParamsAndVoid<PARAM1 ,PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7, PARAM8>... methodRefs) {
             super(methodRefs);
+        }
+
+        public DelegateInvocationResult<Void> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8) throws Exception {
+            return super.invoke(param1, param2, param3, param4, param5, param6, param7, param8);
+        }
+
+        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8) {
+            return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5, param6, param7, param8);
         }
 
         @Override
@@ -373,6 +524,14 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> { //TODO:
             super(methodRefs);
         }
 
+        public DelegateInvocationResult<RETURN> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8, PARAM9 param9) throws Exception {
+            return super.invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9);
+        }
+
+        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8, PARAM9 param9) {
+            return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5, param6, param7, param8, param9);
+        }
+
         @Override
         protected RETURN invoke(Fun.With9Params<RETURN, PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7, PARAM8, PARAM9> function, Object... args) throws Exception {
             return function.invoke(args==null ? null : (PARAM1)args[0], (PARAM2)args[1], (PARAM3)args[2], (PARAM4)args[3], (PARAM5)args[4], (PARAM6)args[5], (PARAM7)args[6], (PARAM8)args[7], (PARAM9)args[8]);
@@ -382,6 +541,14 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> { //TODO:
     public static class With9ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7, PARAM8, PARAM9> extends Delegate<Void, Fun.With9ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7, PARAM8, PARAM9>> {
         public With9ParamsAndVoid(Fun.With9ParamsAndVoid<PARAM1 ,PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7, PARAM8, PARAM9>... methodRefs) {
             super(methodRefs);
+        }
+
+        public DelegateInvocationResult<Void> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8, PARAM9 param9) throws Exception {
+            return super.invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9);
+        }
+
+        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8, PARAM9 param9) {
+            return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5, param6, param7, param8, param9);
         }
 
         @Override
@@ -394,12 +561,16 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> { //TODO:
 
     /**
      * Interface class created to be used in Lombok's @lombok.experimental.Delegate annotation as an argument to the 'excludes' annotation type member.
-     * The idea is that one can create a C# like 'event' by annotating a private Delegate field with @Delegate(excludes=Delegator.IDelegator.class)
+     * The idea is that one can create a C# like 'event' by annotating a private Delegate field with @lombok.experimental.Delegate(excludes=Delegator.IDelegator.class)
      * Going forward we hope that Lombok will support creating meta annotations, in which case this project could create an @Event annotation that lombok would then view as @Delegate(excludes=Delegator.IDelegator.class).
+     *
+     * Please notice that for now, the preferred way of creating an event is
+     * by A) making the Delegate private (so that only the definer can invoke it)
+     * and by B) Creating a public Event (by providing the Delegate to the constructor)
      */
     public interface IDelegator {
         void invoke();
-        void invokeWithSneakyThrows();
+        void invokeAndAggregateExceptions();
         List<?> getMethodRefs();
     }
 
