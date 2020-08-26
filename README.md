@@ -3,7 +3,35 @@ Fun with Delegates, Events and type safe Java Reflection
 
 ## Usage
 
-### Fun and friends: No more functional interfaces
+###Overview
+* [Fun and friends](#fun-and-friends-no-more-functional-interfaces): `Fun.With0Params<String> myFunctionField = "   hello world   "::trim;`
+* [Delegates in Java!](#delegates-in-java)  
+        
+        Delegate.With1Param<String, String> greetingsDelegate = new Delegate.With1Param<>();
+        greetingsDelegate.add(str -> "Hello " + str);
+        greetingsDelegate.add(str -> "Goodbye " + str);
+
+        DelegateInvocationResult<String> invocationResult = greetingsDelegate.invokeAndAggregateExceptions("Sir");
+
+        invocationResult.getFunctionInvocationResults().forEach(funInvRes -> System.out.println(funInvRes.getResult()));
+        //prints: "Hello sir" and "Goodbye Sir"
+* [Events](#events)  
+
+        //Create a private Delegate. Make sure it is private so only *you* can invoke it.
+        private static Delegate.With0Params<String> trimDelegate = new Delegate.With0Params<>();
+
+        //Create a public Event using the delegate you just created.
+        public static Event.With0Params<String> trimEvent= new Event.With0Params<>(trimDelegate);
+* [Type safe reflection](#type-safe-reflection)
+
+        Method m1 = Fun.toMethod(Thread::isAlive)  // Get final method
+        Method m2 = Fun.toMethod(String::isEmpty); // Get method from final class
+        Method m3 = Fun.toMethod(BufferedReader::readLine); // Get method that throws checked exception
+        Method m4 = Fun.<String, Class[]>toMethod(getClass()::getDeclaredMethod); //to get vararg method you must specify parameters in generics
+        Method m5 = Fun.<String>toMethod(Class::forName); // to get overloaded method you must specify parameters in generics
+        Method m6 = Fun.toMethod(this::toString); //Works with inherited methods
+
+### Fun and friends: no more functional interfaces
 With the Fun interface and its sub-interfaces you save yourself the hassle of creating functional interfaces 
 for your fields and method signatures.  
 The functions return value and its parameters, if any, are defined via generic types.  
@@ -83,7 +111,7 @@ This will work:
     Delegate.With0Params<String> myDelegate = new Delegate.With0Params("   hello world  "::trim);
     myDelegate.remove("   hello world  "::trim);
 ```
-### Event
+### Events
 
 Delegates are often used together with Events, where an Event is just the public facing object
 that allows users to add functions to your event. Under the hood the Event simply adds the functions to the underlying 
