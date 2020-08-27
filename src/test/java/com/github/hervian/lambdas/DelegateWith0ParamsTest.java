@@ -1,14 +1,20 @@
 package com.github.hervian.lambdas;
 
 import org.junit.Test;
-import org.w3c.dom.ls.LSOutput;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class DelegateWith0ParamsTest extends AbstractDelegateTest {
+
+    @Mock
+    private DelegateWith0ParamsTest tester;
 
     public void voidMethod(){}
     public String stringMethod(){return "stringMethod";}
@@ -20,8 +26,10 @@ public class DelegateWith0ParamsTest extends AbstractDelegateTest {
 
     @Test
     public void testVoidMethod() throws Exception {
-        Delegate.With0ParamsAndVoid delegate = new Delegate.With0ParamsAndVoid(this::voidMethod);
+        Delegate.With0ParamsAndVoid delegate = new Delegate.With0ParamsAndVoid(tester::voidMethod);
         DelegateInvocationResult<Void> res = delegate.invoke();
+        assertNotNull(res);
+        verify(tester, times(1)).voidMethod();
 
         //Any return type will match the *AndVoid method / the void return type:
         Delegate.With0ParamsAndVoid delegateInt = new Delegate.With0ParamsAndVoid(this::intMethod);
@@ -68,6 +76,19 @@ public class DelegateWith0ParamsTest extends AbstractDelegateTest {
     }
 
     @Test
+    public void testDoubleMethod() throws Exception {
+        Delegate.With0Params<Double> delegate = new Delegate.With0Params<>(this::doubleMethod);
+
+        DelegateInvocationResult<Double> res = delegate.invoke();
+        assertEquals((Double)9d, res.get(0).getResult());
+
+        compile("Delegate.With0Params<Double>", "this::doubleMethod", "this::voidMethod");
+        compile("Delegate.With0Params<Double>", "this::doubleMethod", "this::returnDelegateWith0ParamsTest");
+        compile("Delegate.With0Params<Double>", "this::doubleMethod", "this::integerMethod");
+        compile("Delegate.With0Params<Double>", "this::doubleMethod", "this::intMethod");
+    }
+
+    @Test
     public void testObjectMethod() throws Exception {
         Delegate.With0Params<DelegateWith0ParamsTest> delegate = new Delegate.With0Params<>(this::returnDelegateWith0ParamsTest);
 
@@ -86,35 +107,10 @@ public class DelegateWith0ParamsTest extends AbstractDelegateTest {
         assertEquals(DelegateWith0ParamsTest.class, res2.get(1).getResult().getClass());
     }
 
-    @Test
-    public void testDoubleMethod() throws Exception {
-        Delegate.With0Params<Double> delegate = new Delegate.With0Params<>(this::doubleMethod);
-
-        DelegateInvocationResult<Double> res = delegate.invoke();
-        assertEquals((Double)9d, res.get(0).getResult());
-
-        compile("Delegate.With0Params<Double>", "this::doubleMethod", "this::voidMethod");
-        compile("Delegate.With0Params<Double>", "this::doubleMethod", "this::returnDelegateWith0ParamsTest");
-        compile("Delegate.With0Params<Double>", "this::doubleMethod", "this::integerMethod");
-        compile("Delegate.With0Params<Double>", "this::doubleMethod", "this::intMethod");
-    }
-
     @Override
     protected DelegateType getDelegateType() {
         return DelegateType.With0Params;
     }
-
-    public static void main(String[] args){
-        Delegate.With1Param<String, String> greetingsDelegate = new Delegate.With1Param<>();
-        greetingsDelegate.add(str -> "Hello " + str);
-        greetingsDelegate.add(str -> "Goodbye " + str);
-
-        DelegateInvocationResult<String> invocationResult = greetingsDelegate.invokeAndAggregateExceptions("Sir");
-
-        invocationResult.getFunctionInvocationResults().forEach(funInvRes -> System.out.println(funInvRes.getResult()));
-        //prints: "Hello sir" and "Goodbye Sir"
-    }
-
 
 
 }

@@ -66,7 +66,7 @@ Their behavior mimic that of C#'s Multicast Delegates, in that you can add, remo
 *Example:*
  ```
      public static void main(String[] args){
-        Delegate.With1Param<String, String> greetingsDelegate = new Delegate.With1Param<>();
+        Delegate.With1Param<String, String> greetingsDelegate = new Delegate.With1Param<>(); //NB: Please remember the diamond operator on the right hand side. Without it this line won't compile.
         greetingsDelegate.add(str -> "Hello " + str);
         greetingsDelegate.add(str -> "Goodbye " + str);
 
@@ -96,6 +96,8 @@ Key points:
      Use this invocation method if you want to make sure that all the functions are executed
      or if you don't want to handle any exceptions. But remember to inspect the result for any
      exceptions (`boolean oneOrMoreExceptionsThrown = myDelegateInvocationResultInstance.isOneOrMoreExceptionsThrown()`).
+  1. As always with Java Generics you must remember to add the diamond `<>` operator to the right hand side in order for the 
+     compiler to be able to correctly infer the generic type.
     
 Functions added to a delegate can be removed again, but be aware that a reference to the function is needed.
 

@@ -1,7 +1,6 @@
 package com.github.hervian.lambdas;
 
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Singular;
 
@@ -39,10 +38,6 @@ public class DelegateInvocationResult<RESULT> {
     public FunctionInvocationResult<RESULT> get(int index){
         return getFunctionInvocationResults().get(index);
     }
-
-    /*public boolean oneOrMoreExceptionsThrown(){
-        return oneOrMoreExceptionsThrown;
-    }*/
 
     public List<FunctionInvocationResult<RESULT>> getFunctionInvocationResults(){
         return Collections.unmodifiableList(functionInvocationResults);

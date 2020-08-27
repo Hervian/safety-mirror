@@ -1,5 +1,6 @@
 package com.github.hervian.lambdas;
 
+import com.github.hervian.lambdas.util.SerializedLambdaToMethod;
 import lombok.SneakyThrows;
 
 import java.io.Serializable;
@@ -89,7 +90,6 @@ public interface Fun<RETURN> extends Serializable {
     /**
      * Use the special *AndVoid subclasses for matching methods that return lower case void.
      * Do note, though, that the *AndVoid interfaces will match any return type.
-     * @param <DUMMY> A note on the DUMMY generic value: It was the only way to make the following jUnit assert pass: assertNotNull(Types2.<String, Class<?>[]>createMethod(getClass()::getDeclaredMethod)); See comment in DelegateTest
      */
     @FunctionalInterface
     interface With0ParamsAndVoid<DUMMY> extends Fun<Void> { // A note on the DUMMY generic value: It was the only way to make the following jUnit assert pass: assertNotNull(Types2.<String, Class<?>[]>createMethod(getClass()::getDeclaredMethod)); See comment in DelegateTest

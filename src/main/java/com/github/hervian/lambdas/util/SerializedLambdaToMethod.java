@@ -1,6 +1,6 @@
-package com.github.hervian.lambdas;
+package com.github.hervian.lambdas.util;
 
-import com.github.hervian.reflection.util.SignatureUtil;
+import com.github.hervian.lambdas.Fun;
 
 import java.lang.invoke.SerializedLambda;
 import java.lang.reflect.InvocationTargetException;
@@ -23,15 +23,14 @@ import java.lang.reflect.Method;
  * END OF NOTICE
  *
  * @author Anders Granau Høfft
+ *
+ * Thanks to Holger for this StackOverflow answer: https://stackoverflow.com/a/21879031/6095334
  */
 public class SerializedLambdaToMethod {
 
     private SerializedLambdaToMethod(){}
 
-    /**
-     * Thanks to Holger for this StackOverflow answer: https://stackoverflow.com/a/21879031/6095334
-     */
-    static Method createMethodFromSuperConsumer(Fun lambda) {
+    public static Method createMethodFromSuperConsumer(Fun lambda) {
         SerializedLambda serializedLambda = getSerializedLambda(lambda);
         return getMethod(serializedLambda);
     }
@@ -68,7 +67,7 @@ public class SerializedLambdaToMethod {
         return serializedLambda;
     }
 
-    static String createMethodNameFromSuperConsumer(Fun lambda) {
+    public static String createMethodNameFromSuperConsumer(Fun lambda) {
         SerializedLambda serializedLambda = getSerializedLambda(lambda);
         return serializedLambda.getImplMethodName();
     }
