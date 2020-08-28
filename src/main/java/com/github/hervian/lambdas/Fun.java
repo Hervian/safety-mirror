@@ -60,18 +60,51 @@ public interface Fun<RETURN> extends Serializable {
     static <T1, T2, T3, T4, T5, T6, T7, T8, T9> Method toMethod(Fun.With9ParamsAndVoid<T1, T2, T3, T4, T5, T6, T7, T8, T9> methodRef) { return SerializedLambdaToMethod.createMethodFromSuperConsumer(methodRef); }
 
     /**
-     * Regarding below getName() methods:
-     * lambda$16 -> Holger, on SO: "The limitations are that it will print not very useful method references for lambda expressions (references to the synthetic method containing the lambda code)" https://stackoverflow.com/a/21879031/6095334
+     * Ues this method to turn a Method Reference in the form of a double colon expression into a String holding the method name. That is to get 'isEmpty' from String::isEmpty.
+     * <br> <br>
+     * NB: An output a la 'lambda$16' can occur for corner cases, see  Holger, on SO: "The limitations are that it will print not very useful method references for lambda expressions (references to the synthetic method containing the lambda code)" https://stackoverflow.com/a/21879031/6095334
+     *
+     * @param consumer A Method Reference, typically in the form using the double colon syntax, fx String::isEmpty
+     * @param <DUMMY> A dummy generic value created to satisfy the compiler, which will otherwise get confused and be unable to choose the correct overloaded getName method,
+     * @return
      */
     static <DUMMY> String getName(Fun.With0ParamsAndVoid<DUMMY> consumer) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(consumer); }
+
+    /**
+     * @see Fun#getName(With0ParamsAndVoid)
+     */
     static <T1> String getName(Fun.With1ParamAndVoid<T1> consumer) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(consumer); }
+    /**
+     * @see Fun#getName(With0ParamsAndVoid)
+     */
     static <T1, T2> String getName(Fun.With2ParamsAndVoid<T1, T2> consumer) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(consumer); }
+    /**
+     * @see Fun#getName(With0ParamsAndVoid)
+     */
     static <T1, T2, T3> String getName(Fun.With3ParamsAndVoid<T1, T2, T3> consumer) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(consumer); }
+    /**
+     * @see Fun#getName(With0ParamsAndVoid)
+     */
     static <T1, T2, T3, T4> String getName(Fun.With4ParamsAndVoid<T1, T2, T3, T4> consumer) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(consumer); }
+    /**
+     * @see Fun#getName(With0ParamsAndVoid)
+     */
     static <T1, T2, T3, T4, T5> String getName(Fun.With5ParamsAndVoid<T1, T2, T3, T4, T5> consumer) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(consumer); }
+    /**
+     * @see Fun#getName(With0ParamsAndVoid)
+     */
     static <T1, T2, T3, T4, T5, T6> String getName(Fun.With6ParamsAndVoid<T1, T2, T3, T4, T5, T6> consumer) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(consumer); }
+    /**
+     * @see Fun#getName(With0ParamsAndVoid)
+     */
     static <T1, T2, T3, T4, T5, T6, T7> String getName(Fun.With7ParamsAndVoid<T1, T2, T3, T4, T5, T6, T7> consumer) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(consumer); }
+    /**
+     * @see Fun#getName(With0ParamsAndVoid)
+     */
     static <T1, T2, T3, T4, T5, T6, T7, T8> String getName(Fun.With8ParamsAndVoid<T1, T2, T3, T4, T5, T6, T7, T8> consumer) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(consumer); }
+    /**
+     * @see Fun#getName(With0ParamsAndVoid)
+     */
     static <T1, T2, T3, T4, T5, T6, T7, T8, T9> String getName(Fun.With9ParamsAndVoid<T1, T2, T3, T4, T5, T6, T7, T8, T9> consumer) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(consumer); }
 
 

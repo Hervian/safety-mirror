@@ -35,7 +35,7 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
 
     /**
      * Please notice that null entries are simply ignored/discarded.
-     * @param methodRefs
+     * @param methodRefs Array of Method References to add to the delegate, typically defined using the double colon syntax, MyClassOrObject::myMethod
      */
     public Delegate(METHOD_REF[] methodRefs) {
         add(methodRefs);
@@ -105,7 +105,7 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
      *    Delegate.With0Params&lt;String&gt; myDelegate = new Delegate.With0Params("   hello world  "::trim);
      *    myDelegate.remove("   hello world  "::trim);
      * </pre>
-     * @param methodRefVarArg
+     * @param methodRefVarArg Array or vararg of Method References to add to the delegate, typically defined using the double colon syntax, MyClassOrObject::myMethod
      */
     @SafeVarargs
     public final void add(METHOD_REF... methodRefVarArg){
@@ -138,8 +138,8 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
      *    myDelegate.remove("   hello world  "::trim);
      * </pre>
      *
-     * @param methodRefVarArg
-     * @return
+     * @param methodRefVarArg Array or vararg of Method References to add to the delegate, typically defined using the double colon syntax, MyClassOrObject::myMethod
+     * @return a boolean indicating whether or not anything was removed, i.e. if a match was found.
      */
     @SafeVarargs
     public final boolean remove(METHOD_REF... methodRefVarArg){
