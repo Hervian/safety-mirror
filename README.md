@@ -1,5 +1,5 @@
 # safety-mirror
-Fun with Delegates, Events and type safe Java Reflection
+Fun with Delegates, Events and type safe [Method](https://docs.oracle.com/javase/9/docs/api/java/lang/reflect/Method.html) creation.
 
 ## Releases
 Available in [Maven Central](https://search.maven.org/search?q=g:%22com.github.hervian%22%3D%20AND%20a:%22safety-mirror%22%3D):
@@ -16,10 +16,10 @@ See requirements section if you need to use this library with *Java 8*.
 
 ## Usage
 ### Java 9+ setup guide...
-This project is built with JDK9 and is modularized in that in contains a module-info.java file.
-The module's name is safety.mirror.
+This project is built with JDK9 and is modularized in that in contains a *module-info.java* file.
+The module's name is `safety.mirror`.
 
-### Overview of features
+### Cheat sheet of features
 * [Fun and friends](#fun-and-friends-no-more-functional-interfaces): `Fun.With0Params<String> myFunctionField = "   hello world   "::trim;`
 * [Delegates in Java!](#delegates-in-java)  
         
@@ -38,7 +38,7 @@ The module's name is safety.mirror.
 
         //Create a public Event using the delegate you just created.
         public static Event.With0Params<String> trimEvent= new Event.With0Params<>(trimDelegate);
-* [Type safe reflection](#type-safe-reflection)
+* [Type safe method creation](#type-safe-method-creation)
 
         Method m1 = Fun.toMethod(Thread::isAlive)  // Get final method
         Method m2 = Fun.toMethod(String::isEmpty); // Get method from final class
@@ -158,7 +158,7 @@ Example:
 ```
  
 
-### Type safe reflection
+### Type safe method creation
 Simply provide a [method reference](https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html) 
 to one of the overloaded toMethod methods in the Fun class. This will provide you with a `java.lang.reflect.Method`.
 
@@ -174,4 +174,4 @@ Notice that you have to provide the method parameters in generics under certain 
 (When the method is overloaded, or if the method has a varargs parameter).    
 
 ## Related projects
-See [lambda-factory](https://github.com/Hervian/lambda-factory), which makes your Method invocations as fast as direct method invocation.
+* [lambda-factory](https://github.com/Hervian/lambda-factory): a fast alternative to [Reflection](https://docs.oracle.com/javase/9/docs/api/java/lang/reflect/package-summary.html-based) based method invocation.
