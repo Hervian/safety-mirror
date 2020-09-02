@@ -1,4 +1,4 @@
-package com.github.hervian.lambdas;
+package com.github.hervian.reflection;
 
 import org.junit.Test;
 

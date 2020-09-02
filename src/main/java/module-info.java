@@ -1,4 +1,4 @@
 open module safety.mirror {
-    requires static lombok;
-    exports com.github.hervian.lambdas;
+  requires static lombok;
+  exports com.github.hervian.reflection;
 }

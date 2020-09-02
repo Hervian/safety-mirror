@@ -1,6 +1,6 @@
-package com.github.hervian.lambdas;
+package com.github.hervian.reflection;
 
-import com.github.hervian.lambdas.util.SerializedLambdaToMethod;
+import com.github.hervian.reflection.util.SerializedLambdaToMethod;
 import lombok.SneakyThrows;
 
 import java.io.Serializable;

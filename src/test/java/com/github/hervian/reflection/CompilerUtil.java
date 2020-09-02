@@ -1,11 +1,11 @@
-package com.github.hervian.lambdas;
+package com.github.hervian.reflection;
 
 import org.joor.Reflect;
 import org.joor.ReflectException;
 
-import static org.joor.Reflect.*;
-
 public class CompilerUtil {
+
+    private static final String packageString = Delegate.class.getPackage().getName();
 
     /**
      * NB: The Method Reference must be to a PUBLIC method. This may be a limitation with the chosen library JOOR.
@@ -13,7 +13,7 @@ public class CompilerUtil {
      */
     static <T> T compile(Class<T> classToExtend, String functionField) throws ReflectException {
         String name = classToExtend.getName() + "CanCompileTest";
-        String sourceCode = "package com.github.hervian.lambdas;\n" +
+        String sourceCode = "package " + packageString + ";\n" +
                 "class "+ classToExtend.getSimpleName() + "CanCompileTest extends "+classToExtend.getName()+" {\n" +
                 "    " + functionField + ";\n" +
                 "}\n";

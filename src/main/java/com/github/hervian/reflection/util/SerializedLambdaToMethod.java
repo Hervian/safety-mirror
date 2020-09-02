@@ -1,6 +1,6 @@
-package com.github.hervian.lambdas.util;
+package com.github.hervian.reflection.util;
 
-import com.github.hervian.lambdas.Fun;
+import com.github.hervian.reflection.Fun;
 
 import java.lang.invoke.SerializedLambda;
 import java.lang.reflect.InvocationTargetException;
@@ -35,7 +35,7 @@ public class SerializedLambdaToMethod {
         return getMethod(serializedLambda);
     }
 
-     private static Method getMethod(SerializedLambda serializedLambda) {
+    private static Method getMethod(SerializedLambda serializedLambda) {
         if (serializedLambda==null) {
             return null;
         } else {
@@ -79,8 +79,8 @@ public class SerializedLambdaToMethod {
         Class<?>[] paramTypes = new Class[params.length];
         for (int i=0; i<params.length; i++) {
             paramTypes[i] = isPrimitive(params[i])
-                    ? getPrimitiveClass(params[i])
-                    : Class.forName(params[i].contains("[") ? parameters[i] + ";" : params[i]); //Arrays must somewhat surprising be in something resembling the JVM format (fx: [Ljava.lang.String) whereas regular classes must be in the format of class.getName (fx java.lang.String)
+                ? getPrimitiveClass(params[i])
+                : Class.forName(params[i].contains("[") ? parameters[i] + ";" : params[i]); //Arrays must somewhat surprising be in something resembling the JVM format (fx: [Ljava.lang.String) whereas regular classes must be in the format of class.getName (fx java.lang.String)
         }
         return paramTypes;
     }

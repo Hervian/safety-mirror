@@ -1,4 +1,4 @@
-package com.github.hervian.lambdas.util;
+package com.github.hervian.reflection.util;
 
 import java.util.ArrayList;
 import java.util.List;

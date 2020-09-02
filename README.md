@@ -1,9 +1,25 @@
 # safety-mirror
 Fun with Delegates, Events and type safe Java Reflection
 
-## Usage
+## Releases
+Available in [Maven Central](https://search.maven.org/search?q=g:%22com.github.hervian%22%3D%20AND%20a:%22safety-mirror%22%3D):
+```
+<dependency>
+  <groupId>com.github.hervian</groupId>
+  <artifactId>safety-mirror</artifactId>
+  <version>See Maven Central or mvnrepository.com for newest version</version>
+</dependency>
+```
 
-###Overview
+Requires **Java 9** or above.
+See requirements section if you need to use this library with *Java 8*.
+
+## Usage
+### Java 9+ setup guide...
+This project is built with JDK9 and is modularized in that in contains a module-info.java file.
+The module's name is safety.mirror.
+
+### Overview of features
 * [Fun and friends](#fun-and-friends-no-more-functional-interfaces): `Fun.With0Params<String> myFunctionField = "   hello world   "::trim;`
 * [Delegates in Java!](#delegates-in-java)  
         
@@ -30,6 +46,14 @@ Fun with Delegates, Events and type safe Java Reflection
         Method m4 = Fun.<String, Class[]>toMethod(getClass()::getDeclaredMethod); //to get vararg method you must specify parameters in generics
         Method m5 = Fun.<String>toMethod(Class::forName); // to get overloaded method you must specify parameters in generics
         Method m6 = Fun.toMethod(this::toString); //Works with inherited methods
+
+### Requirements
+Requires **Java 9** or above.  
+If you wish to use this project with *Java 8* you must clone the project and 1) change the pom.xml's properties section 
+such that source and target is set to 1.8 (instead of 1.9) and 2) delete the  module-info.java file.
+After this you should be able to build using JDK-8.
+
+## Details
 
 ### Fun and friends: no more functional interfaces
 With the Fun interface and its sub-interfaces you save yourself the hassle of creating functional interfaces 
@@ -148,12 +172,6 @@ to one of the overloaded toMethod methods in the Fun class. This will provide yo
 
 Notice that you have to provide the method parameters in generics under certain circumstances 
 (When the method is overloaded, or if the method has a varargs parameter).    
-    
-Note that the library requires Java 8 or above.
-
-## Dependency Management
-
-Since this project is not in any Maven repo you must use [JitPack](https://jitpack.io/) to add the dependency.
 
 ## Related projects
 See [lambda-factory](https://github.com/Hervian/lambda-factory), which makes your Method invocations as fast as direct method invocation.

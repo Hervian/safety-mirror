@@ -1,4 +1,4 @@
-package com.github.hervian.lambdas;
+package com.github.hervian.reflection;
 
 import org.junit.Test;
 
@@ -48,6 +48,19 @@ public class FunToMethodTest {
 
         assertEquals("str1str2", Fun.toMethod(NestedClass::concatenate).invoke(new NestedClass(), "str1", "str2"));
         assertEquals("str1str2", Fun.toMethod(NestedClass::concatenateStatic).invoke(null, "str1", "str2"));
+    }
+
+    @Test
+    public void testReturnArray(){
+        String[] stringArray = new String[1];
+        stringArray[0] = "hello world";
+        Fun.With1Param<String[], String[]> fun = this::returnStringArray;
+        String[] res = fun.invokeWithSneakyThrows(stringArray);
+        assertEquals("hello world", res[0]);
+    }
+
+    public String[] returnStringArray(String[] stringArray){
+        return stringArray;
     }
     
     @Test
