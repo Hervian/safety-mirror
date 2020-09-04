@@ -7,7 +7,7 @@ Available in [Maven Central](https://search.maven.org/search?q=g:%22com.github.h
 <dependency>
   <groupId>com.github.hervian</groupId>
   <artifactId>safety-mirror</artifactId>
-  <version>See Maven Central or mvnrepository.com for newest version</version>
+  <version>3.0.0 (or see Maven Central or mvnrepository.com for newest version)</version>
 </dependency>
 ```
 
@@ -17,10 +17,38 @@ See requirements section if you need to use this library with *Java 8*.
 ## Usage
 ### Java 9+ setup guide...
 This project is built with JDK9 and is modularized in that in contains a *module-info.java* file.
-The module's name is `safety.mirror`.
+The module's name is `safety.mirror`.  
+To make the library work, you must both add the *safety.mirror* module and allow it to perform reflection on your code.  
+That is:  
+1.  add the following line to your *module-info.java* file: `requires safety.mirror;`
+1.  to allow the library to use reflection on your code you can do one of the following:
+    1.  Declare your module as *open*, fx `open module my.project`, thereby granting all modules reflective access to
+    all of your project's packages.
+    1. open one or more specific packages to reflection (i.e. granting all modules reflective access to that 
+    or those packages). This is done by adding a line a la `opens com.my.example.package;`. 
+    Off course, if you're choosing this approach, you should open those packages where you
+     use the safety-mirror library.
+     
+Example #1:  
+```java
+open module my.test {
+    requires safety.mirror;
+}
+```
+
+Example #2:  
+```java
+module my.test {
+    requires safety.mirror;
+    opens com.test.main;
+}
+```
 
 ### Cheat sheet of features
-* [Fun and friends](#fun-and-friends-no-more-functional-interfaces): `Fun.With0Params<String> myFunctionField = "   hello world   "::trim;`
+* [Fun and friends](#fun-and-friends-no-more-functional-interfaces):  
+        `Fun.With0Params<String> myFunctionField = "   hello world   "::trim;`  
+        `Fun.With2Params<Boolean, Object, Object> equals = Objects::equals;`  
+        `Fun.With1ParamAndVoid<String> print = System.out::println;`
 * [Delegates in Java!](#delegates-in-java)  
         
         Delegate.With1Param<String, String> greetingsDelegate = new Delegate.With1Param<>();
