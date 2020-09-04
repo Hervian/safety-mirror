@@ -3,7 +3,7 @@
 
 	<groupId>com.github.hervian</groupId>
 	<artifactId>safety-mirror</artifactId>
-	<version>3.0.0-SNAPSHOT</version>
+	<version>3.0.0</version>
 	<packaging>jar</packaging>
 
 	<name>safety-mirror</name>
@@ -22,7 +22,7 @@
 		<connection>scm:git:https://github.com/Hervian/safety-mirror.git</connection>
 		<url>http://github.com/hervian/safety-mirror</url>
 		<developerConnection>scm:git:https://github.com/Hervian/safety-mirror.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>safety-mirror-3.0.0</tag>
 	</scm>
 
 	<distributionManagement>
