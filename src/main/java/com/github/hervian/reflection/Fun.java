@@ -27,17 +27,26 @@ import java.lang.reflect.Method;
  * Fun, short for Function, is a super interface that from a user perspective is used as part of a fluent API
  * in signatures that accepts Method References.
  * I.e. one writes 'Fun.' and then choose the appropriate nested class such as 'Fun.With2Params'.
+ * (In most IDEs you can simply type Fun.W2 to get the autocomplete to suggest 'Fun.With2Params'.)
+ *
  * Notice that you must supply the signatures return value and parameters in the generics,
  * fx: 'Fun.With2Params&lt;Double, Integer, String&gt; for methods that
- * given an Ingeger and a String (in that order) returns a Double.
+ * given an Integer and a String (in that order) returns a Double.
  *
  * Note that since capital 'Void' is NOT a boxed lower case 'void' we need to give method references
  * with return type void special attention. In other words, current Java versions won't accept generics with
  * primitives, including void, but for all primitives except void, this is ok since fx 'Fun.With2Params&lt;Double&gt;
  * will match primitive signatures due to autoboxing. But for void as return type we must use a special subclass and
- * write code like fx: 'Fun.With2Params.Void&lt;Double&gt;
+ * write code like fx: 'Fun.With2ParamsAndVoid&lt;Double&gt;
  * Note also, that this may (or may not) change once Project Valhalla is completed and specialized Generics
- * become part of the Java Language Specification. See https://en.wikipedia.org/wiki/Project_Valhalla_(Java_language)
+ * become part of the Java Language Specification. See https://en.wikipedia.org/wiki/Project_Valhalla_(Java_language).
+ *
+ * Besides the fluent API described above (i.e. the subinterfaces that allow you to pass around functions and
+ * use them as types), the Fun interface contains a large number of overloaded methods.
+ * The overloading is actually an implementation detail.
+ * From a user perspective you should consider the Fun type to have the following API:
+ *
+ * <code>java.lang.Method method = Fun.toMethod(SomeClassOrObject::someMethod);</code>
  *
  * </pre>
  * @author Anders Granau Høfft
@@ -63,6 +72,7 @@ public interface Fun<RETURN> extends Serializable {
      * Ues this method to turn a Method Reference in the form of a double colon expression into a String holding the method name. That is to get 'isEmpty' from String::isEmpty.
      * <br> <br>
      * NB: An output a la 'lambda$16' can occur for corner cases, see  Holger, on SO: "The limitations are that it will print not very useful method references for lambda expressions (references to the synthetic method containing the lambda code)" https://stackoverflow.com/a/21879031/6095334
+     * TODO: In those cases where a string a la 'lambda$16' is returned, i.e. the method name could not be resolved, one could perhaps use Gunnar Morlings approach as a fallback? https://in.relation.to/2016/04/14/emulating-property-literals-with-java-8-method-references/
      *
      * @param consumer A Method Reference, typically in the form using the double colon syntax, fx String::isEmpty
      * @param <DUMMY> A dummy generic value created to satisfy the compiler, which will otherwise get confused and be unable to choose the correct overloaded getName method,
@@ -126,7 +136,7 @@ public interface Fun<RETURN> extends Serializable {
      */
     @FunctionalInterface
     interface With0ParamsAndVoid<DUMMY> extends Fun<Void> { // A note on the DUMMY generic value: It was the only way to make the following jUnit assert pass: assertNotNull(Types2.<String, Class<?>[]>createMethod(getClass()::getDeclaredMethod)); See comment in DelegateTest
-        void invoke()  throws Exception;
+        void invoke() throws Exception;
 
         @SneakyThrows
         default void invokeWithSneakyThrows(){
@@ -136,7 +146,7 @@ public interface Fun<RETURN> extends Serializable {
 
     @FunctionalInterface
     interface With1Param<RETURN, PARAM1> extends Fun<RETURN> {
-        RETURN invoke(PARAM1 param1)  throws Exception;
+        RETURN invoke(PARAM1 param1) throws Exception;
 
         @SneakyThrows
         default RETURN invokeWithSneakyThrows(PARAM1 param1){
@@ -149,7 +159,7 @@ public interface Fun<RETURN> extends Serializable {
      */
     @FunctionalInterface
     interface With1ParamAndVoid<PARAM1> extends Fun<Void> {
-        void invoke(PARAM1 param1)  throws Exception;
+        void invoke(PARAM1 param1) throws Exception;
 
         @SneakyThrows
         default void invokeWithSneakyThrows(PARAM1 param1){
@@ -159,7 +169,7 @@ public interface Fun<RETURN> extends Serializable {
 
     @FunctionalInterface
     interface With2Params<RETURN, PARAM1, PARAM2> extends Fun<RETURN> {
-        RETURN invoke(PARAM1 param1, PARAM2 param2)  throws Exception;
+        RETURN invoke(PARAM1 param1, PARAM2 param2) throws Exception;
 
         @SneakyThrows
         default RETURN invokeWithSneakyThrows(PARAM1 param1, PARAM2 param2){
@@ -172,7 +182,7 @@ public interface Fun<RETURN> extends Serializable {
      */
     @FunctionalInterface
     interface With2ParamsAndVoid<PARAM1, PARAM2> extends Fun<Void> {
-        void invoke(PARAM1 param1, PARAM2 param2)  throws Exception;
+        void invoke(PARAM1 param1, PARAM2 param2) throws Exception;
 
         @SneakyThrows
         default void invokeWithSneakyThrows(PARAM1 param1, PARAM2 param2){
@@ -182,7 +192,7 @@ public interface Fun<RETURN> extends Serializable {
 
     @FunctionalInterface
     interface With3Params<RETURN, PARAM1, PARAM2, PARAM3> extends Fun<RETURN> {
-        RETURN invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3)  throws Exception;
+        RETURN invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3) throws Exception;
 
         @SneakyThrows
         default RETURN invokeWithSneakyThrows(PARAM1 param1, PARAM2 param2, PARAM3 param3){
@@ -195,7 +205,7 @@ public interface Fun<RETURN> extends Serializable {
      */
     @FunctionalInterface
     interface With3ParamsAndVoid<PARAM1, PARAM2, PARAM3> extends Fun<Void> {
-        void invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3)  throws Exception;
+        void invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3) throws Exception;
 
         @SneakyThrows
         default void invokeWithSneakyThrows(PARAM1 param1, PARAM2 param2, PARAM3 param3){
@@ -205,7 +215,7 @@ public interface Fun<RETURN> extends Serializable {
 
     @FunctionalInterface
     interface With4Params<RETURN, PARAM1, PARAM2, PARAM3, PARAM4> extends Fun<RETURN> {
-        RETURN invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4)  throws Exception;
+        RETURN invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4) throws Exception;
 
         @SneakyThrows
         default RETURN invokeWithSneakyThrows(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4){
@@ -218,7 +228,7 @@ public interface Fun<RETURN> extends Serializable {
      */
     @FunctionalInterface
     interface With4ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4> extends Fun<Void> {
-        void invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4)  throws Exception;
+        void invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4) throws Exception;
 
         @SneakyThrows
         default void invokeWithSneakyThrows(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4){
@@ -228,7 +238,7 @@ public interface Fun<RETURN> extends Serializable {
 
     @FunctionalInterface
     interface With5Params<RETURN, PARAM1, PARAM2, PARAM3, PARAM4, PARAM5> extends Fun<RETURN> {
-        RETURN invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5)  throws Exception;
+        RETURN invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5) throws Exception;
 
         @SneakyThrows
         default RETURN invokeWithSneakyThrows(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5){
@@ -241,7 +251,7 @@ public interface Fun<RETURN> extends Serializable {
      */
     @FunctionalInterface
     interface With5ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5> extends Fun<Void> {
-        void invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5)  throws Exception;
+        void invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5) throws Exception;
 
         @SneakyThrows
         default void invokeWithSneakyThrows(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5){
@@ -251,7 +261,7 @@ public interface Fun<RETURN> extends Serializable {
 
     @FunctionalInterface
     interface With6Params<RETURN, PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6> extends Fun<RETURN> {
-        RETURN invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6)  throws Exception;
+        RETURN invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6) throws Exception;
 
         @SneakyThrows
         default RETURN invokeWithSneakyThrows(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6){
@@ -264,7 +274,7 @@ public interface Fun<RETURN> extends Serializable {
      */
     @FunctionalInterface
     interface With6ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6> extends Fun<Void> {
-        void invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6)  throws Exception;
+        void invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6) throws Exception;
 
         @SneakyThrows
         default void invokeWithSneakyThrows(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6){
@@ -274,7 +284,7 @@ public interface Fun<RETURN> extends Serializable {
 
     @FunctionalInterface
     interface With7Params<RETURN, PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7> extends Fun<RETURN> {
-        RETURN invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7)  throws Exception;
+        RETURN invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7) throws Exception;
 
         @SneakyThrows
         default RETURN invokeWithSneakyThrows(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7){
@@ -287,7 +297,7 @@ public interface Fun<RETURN> extends Serializable {
      */
     @FunctionalInterface
     interface With7ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7> extends Fun<Void> {
-        void invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7)  throws Exception;
+        void invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7) throws Exception;
 
         @SneakyThrows
         default void invokeWithSneakyThrows(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7){
@@ -297,7 +307,7 @@ public interface Fun<RETURN> extends Serializable {
 
     @FunctionalInterface
     interface With8Params<RETURN, PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7, PARAM8> extends Fun<RETURN> {
-        RETURN invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8)  throws Exception;
+        RETURN invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8) throws Exception;
 
         @SneakyThrows
         default RETURN invokeWithSneakyThrows(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8){
@@ -310,7 +320,7 @@ public interface Fun<RETURN> extends Serializable {
      */
     @FunctionalInterface
     interface With8ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7, PARAM8> extends Fun<Void> {
-        void invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8)  throws Exception;
+        void invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8) throws Exception;
 
         @SneakyThrows
         default void invokeWithSneakyThrows(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8){
@@ -320,7 +330,7 @@ public interface Fun<RETURN> extends Serializable {
 
     @FunctionalInterface
     interface With9Params<RETURN, PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7, PARAM8, PARAM9> extends Fun<RETURN> {
-        RETURN invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8, PARAM9 param9)  throws Exception;
+        RETURN invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8, PARAM9 param9) throws Exception;
 
         @SneakyThrows
         default RETURN invokeWithSneakyThrows(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8, PARAM9 param9){
@@ -333,7 +343,7 @@ public interface Fun<RETURN> extends Serializable {
      */
     @FunctionalInterface
     interface With9ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7, PARAM8, PARAM9> extends Fun<Void> {
-        void invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8, PARAM9 param9)  throws Exception;
+        void invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8, PARAM9 param9) throws Exception;
 
         @SneakyThrows
         default void invokeWithSneakyThrows(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8, PARAM9 param9){
