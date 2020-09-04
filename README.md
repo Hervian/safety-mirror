@@ -15,35 +15,6 @@ Requires **Java 9** or above.
 See requirements section if you need to use this library with *Java 8*.
 
 ## Usage
-### Java 9+ setup guide...
-This project is built with JDK9 and is modularized in that in contains a *module-info.java* file.
-The module's name is `safety.mirror`.  
-To make the library work, you must both add the *safety.mirror* module and allow it to perform reflection on your code.  
-That is:  
-1.  add the following line to your *module-info.java* file: `requires safety.mirror;`
-1.  to allow the library to use reflection on your code you can do one of the following:
-    1.  Declare your module as *open*, fx `open module my.project`, thereby granting all modules reflective access to
-    all of your project's packages.
-    1. open one or more specific packages to reflection (i.e. granting all modules reflective access to that 
-    or those packages). This is done by adding a line a la `opens com.my.example.package;`. 
-    Off course, if you're choosing this approach, you should open those packages where you
-     use the safety-mirror library.
-     
-Example #1:  
-```java
-open module my.test {
-    requires safety.mirror;
-}
-```
-
-Example #2:  
-```java
-module my.test {
-    requires safety.mirror;
-    opens com.test.main;
-}
-```
-
 ### Cheat sheet of features
 * [Fun and friends](#fun-and-friends-no-more-functional-interfaces):  
         `Fun.With0Params<String> myFunctionField = "   hello world   "::trim;`
@@ -86,6 +57,35 @@ Requires **Java 9** or above.
 If you wish to use this project with *Java 8* you must clone the project and 1) change the pom.xml's properties section 
 such that source and target is set to 1.8 (instead of 1.9) and 2) delete the  module-info.java file.
 After this you should be able to build using JDK-8.
+
+### Java 9+ setup guide...
+This project is built with JDK9 and is modularized in that in contains a *module-info.java* file.
+The module's name is `safety.mirror`.  
+To make the library work, you must both add the *safety.mirror* module and allow it to perform reflection on your code.  
+That is:  
+1.  add the following line to your *module-info.java* file: `requires safety.mirror;`
+1.  to allow the library to use reflection on your code you can do one of the following:
+    1.  Declare your module as *open*, fx `open module my.project`, thereby granting all modules reflective access to
+    all of your project's packages.
+    1. open one or more specific packages to reflection (i.e. granting all modules reflective access to that 
+    or those packages). This is done by adding a line a la `opens com.my.example.package;`. 
+    Off course, if you're choosing this approach, you should open those packages where you
+     use the safety-mirror library.
+     
+Example #1:  
+```java
+open module my.test {
+    requires safety.mirror;
+}
+```
+
+Example #2:  
+```java
+module my.test {
+    requires safety.mirror;
+    opens com.test.main;
+}
+```
 
 ## Details
 
