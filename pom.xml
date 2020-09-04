@@ -17,6 +17,15 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
+	
+	<developers>
+        <developer>
+            <id>anders</id>
+            <name>Anders Høfft</name>
+            <email>aghoefft@gmail.com</email>
+            <timezone>+2</timezone>
+        </developer>
+    </developers>
 
 	<scm>
 		<connection>scm:git:https://github.com/Hervian/safety-mirror.git</connection>
@@ -89,7 +98,7 @@
 			</plugin>
 			<plugin>
 				<!-- Perform a release by calling 'mvn release:clean release:prepare' answering the prompts for versions and tags, followed by 'mvn release:perform'.
-                     This execution will deploy to OSSRH and release to the Central Repository in one go, thanks to the usage of the Nexus Staging Maven Plugin with autoReleaseAfterClose set to true.
+                     This execution will deploy to OSSRH and release to the Central Repository in one go, thanks to the usage of the Nexus Staging Maven Plugin with autoReleaseAfterClose set to true. See below note under the release profile though. The call to 'mvn release:perform: currently fails saying that the lombok module cannot be found. Probably too old plugins being used transitively by the maven-release-plugin. Currently I therefor tag using the release plugin, but deploy via 'mvn clean deploy -P release'.
                  -->
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
@@ -106,7 +115,7 @@
 	<profiles>
 		<profile>
 			<!-- Note that this profile is not intended to be called directly (via '-P release'), rather one should use the maven-release-plugin, which in turn activates the release-profile.
-                However, if one wants to handle the versioning manually, one can use this profile by calling:
+                However, in the time of writing the call to the maven-release-plugin's release goal fails since the older transitive plugin version used by that plugin cannot find the lombok module. As such, one must either delombok the project before "releasing" or - as I have done - release via 'mvn clean deploy -P release'. Remember to have a server section in the settings.xml with id=ossrh and a username and password for https://oss.sonatype.org/ with rights to write to the safety-mirror repositories. Also, to perform the gpg signing one must have a) the gpg tool installed and ready on the path env and the proper privat key imported and the corresponding passphrase at hand.
              -->
 			<id>release</id>
 			<build>
