@@ -48,6 +48,12 @@ public class FunToMethodTest {
 
         assertEquals("str1str2", Fun.toMethod(NestedClass::concatenate).invoke(new NestedClass(), "str1", "str2"));
         assertEquals("str1str2", Fun.toMethod(NestedClass::concatenateStatic).invoke(null, "str1", "str2"));
+        Method m = Fun.toMethod((Fun.With1ParamAndVoid<String[]>)new FunToMethodTest()::methodThatTakesAVarargParam); //When varargs is involved you are unfortunately forces to cast to avoid an "Ambiguous method call" error
+        assertNotNull(m);
+    }
+
+    public void methodThatTakesAVarargParam(String... vararg){
+
     }
 
     @Test

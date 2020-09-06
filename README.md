@@ -207,5 +207,17 @@ to one of the overloaded toMethod methods in the Fun class. This will provide yo
 Notice that you have to provide the method parameters in generics under certain circumstances 
 (When the method is overloaded, or if the method has a varargs parameter).    
 
+### Known limitations and workarounds
+The static overloaded Fun.toMethod methods does for some corner cases not compile when varargs is involved.
+To solve this, one must help the compiler by casting:  
+`Method m = Fun.toMethod((Fun.With1ParamAndVoid<String[]>)new FunToMethodTest()::methodThatTakesAVarargParam); //When varargs is involved you are unfortunately forced to cast to avoid an "Ambiguous method call" error.`  
+Elaboration:  
+Take for example the following method:
+`public void foo(String... stringArray){...}`  
+The following won't compile:  
+`Method m = Fun.<String[]>toMethod(this::foo);`  
+The reason is that the compiler can't find the correct overloaded method (With1ParamAndVoid<String[]>). This is the compiler error:  
+`Ambiguous method call. Both toMethod(With0ParamsAndVoid<Object>) in Fun and toMethod(With1ParamAndVoid<Object>) in Fun match`
+
 ## Related projects
 * [lambda-factory](https://github.com/Hervian/lambda-factory): a fast alternative to [Reflection](https://docs.oracle.com/javase/9/docs/api/java/lang/reflect/package-summary.html-based) based method invocation.
