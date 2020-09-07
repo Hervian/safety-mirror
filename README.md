@@ -17,15 +17,21 @@ See requirements section if you need to use this library with *Java 8*.
 ## Usage
 ### Cheat sheet of features
 * [Fun and friends](#fun-and-friends-no-more-functional-interfaces):  
-        `Fun.With0Params<String> myFunctionField = "   hello world   "::trim;`
+        `Fun.With0Params<String> myFunctionField = "   hello world   "::trim;`  
         `Fun.With2Params<Boolean, Object, Object> equals = Objects::equals;`  
-        `Fun.With1ParamAndVoid<String> print = System.out::println;` 
+        
+        public void foo(Fun.With1ParamAndVoid<String> printer) throws Exception {
+            printer.invoke("hello world);
+        }  
+        foo(System.out::println);   //This signature match the the Fun defined by method Foo. If it did not, the compiler would emit an error.  
+        
+    It is all type safe: you will get compile time errors if the Method Reference's signature does not match what is defined by the Fun subclass.
         
         Method m1 = Fun.toMethod(String::isEmpty)
         Method m2 = Fun.<String>toMethod(Class::forName)); // to get overloaded method you must specify parameters in generics  
         
-        assertEquals("isEmpty", Fun.getName(String::isEmpty)); //use Fun's static getName method to get the method name.
-        The create Methods will not return the correct String.
+        assertEquals("isEmpty", Fun.getName(String::isEmpty)); //use Fun's static getName method to get the method name. The Method objects returned from toMethod will not return the correct String.
+        
 * [Delegates in Java!](#delegates-in-java)  
         
         Delegate.With1Param<String, String> greetingsDelegate = new Delegate.With1Param<>();
