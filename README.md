@@ -23,9 +23,16 @@ See requirements section if you need to use this library with *Java 8*.
         public void foo(Fun.With1ParamAndVoid<String> printer) throws Exception {
             printer.invoke("hello world);
         }  
-        foo(System.out::println);   //This signature match the the Fun defined by method Foo. If it did not, the compiler would emit an error.  
+        public void test(){
+            foo(System.out::println);  //This signature match the the Fun defined by method Foo. If it did not, the compiler would emit an error.  
+        }  
         
-    It is all type safe: you will get compile time errors if the Method Reference's signature does not match what is defined by the Fun subclass.
+In general: 
+*  choose the subtype of Fun that matches the number of parameters of the signature you want
+ (i.e. `Fun.With0Params<RETURN>`, `Fun.With1Param<RETURN, PARAM1>`, `FunWith2Params<RETURN, PARAM1, PARAM2>`...).
+* specify return type and parameters via generics.
+* choose the special *AndVoid variant Fun subtype when dealing with signatures that return lower case void (unfortunately Void is not a boxed void...).  
+It is all type safe: you will get compile time errors if the Method Reference's signature does not match what is defined by the Fun subclass.
         
         Method m1 = Fun.toMethod(String::isEmpty)
         Method m2 = Fun.<String>toMethod(Class::forName)); // to get overloaded method you must specify parameters in generics  
