@@ -245,6 +245,12 @@ public interface Fun<RETURN> extends Serializable {
     interface With2Params<RETURN, PARAM1, PARAM2> extends Fun<RETURN> {
         RETURN invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2) throws Exception;
 
+        /**
+         * @param param1
+         * @param param2
+         * @return the return value/result of the invoked method
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         @SneakyThrows
         default RETURN invokeWithSneakyThrows(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2){
             return invoke(param1, param2);
@@ -273,6 +279,13 @@ public interface Fun<RETURN> extends Serializable {
     interface With3Params<RETURN, PARAM1, PARAM2, PARAM3> extends Fun<RETURN> {
         RETURN invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3) throws Exception;
 
+        /**
+         * @param param1
+         * @param param2
+         * @param param3
+         * @return the return value/result of the invoked method
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         @SneakyThrows
         default RETURN invokeWithSneakyThrows(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3){
             return invoke(param1, param2, param3);
@@ -302,6 +315,14 @@ public interface Fun<RETURN> extends Serializable {
     interface With4Params<RETURN, PARAM1, PARAM2, PARAM3, PARAM4> extends Fun<RETURN> {
         RETURN invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4) throws Exception;
 
+        /**
+         * @param param1
+         * @param param2
+         * @param param3
+         * @param param4
+         * @return the return value/result of the invoked method
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         @SneakyThrows
         default RETURN invokeWithSneakyThrows(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4){
             return invoke(param1, param2, param3, param4);
@@ -332,6 +353,15 @@ public interface Fun<RETURN> extends Serializable {
     interface With5Params<RETURN, PARAM1, PARAM2, PARAM3, PARAM4, PARAM5> extends Fun<RETURN> {
         RETURN invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5) throws Exception;
 
+        /**
+         * @param param1
+         * @param param2
+         * @param param3
+         * @param param4
+         * @param param5
+         * @return the return value/result of the invoked method
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         @SneakyThrows
         default RETURN invokeWithSneakyThrows(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5){
             return invoke(param1, param2, param3, param4, param5);
@@ -363,6 +393,16 @@ public interface Fun<RETURN> extends Serializable {
     interface With6Params<RETURN, PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6> extends Fun<RETURN> {
         RETURN invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6) throws Exception;
 
+        /**
+         * @param param1
+         * @param param2
+         * @param param3
+         * @param param4
+         * @param param5
+         * @param param6
+         * @return the return value/result of the invoked method
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         @SneakyThrows
         default RETURN invokeWithSneakyThrows(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6){
             return invoke(param1, param2, param3, param4, param5, param6);
@@ -395,6 +435,17 @@ public interface Fun<RETURN> extends Serializable {
     interface With7Params<RETURN, PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7> extends Fun<RETURN> {
         RETURN invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7) throws Exception;
 
+        /**
+         * @param param1
+         * @param param2
+         * @param param3
+         * @param param4
+         * @param param5
+         * @param param6
+         * @param param7
+         * @return the return value/result of the invoked method
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         @SneakyThrows
         default RETURN invokeWithSneakyThrows(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7){
             return invoke(param1, param2, param3, param4, param5, param6, param7);
@@ -428,6 +479,18 @@ public interface Fun<RETURN> extends Serializable {
     interface With8Params<RETURN, PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7, PARAM8> extends Fun<RETURN> {
         RETURN invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8) throws Exception;
 
+        /**
+         * @param param1
+         * @param param2
+         * @param param3
+         * @param param4
+         * @param param5
+         * @param param6
+         * @param param7
+         * @param param8
+         * @return the return value/result of the invoked method
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         @SneakyThrows
         default RETURN invokeWithSneakyThrows(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8){
             return invoke(param1, param2, param3, param4, param5, param6, param7, param8);
@@ -462,6 +525,19 @@ public interface Fun<RETURN> extends Serializable {
     interface With9Params<RETURN, PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7, PARAM8, PARAM9> extends Fun<RETURN> {
         RETURN invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8, @NonNull @NotNull PARAM9 param9) throws Exception;
 
+        /**
+         * @param param1
+         * @param param2
+         * @param param3
+         * @param param4
+         * @param param5
+         * @param param6
+         * @param param7
+         * @param param8
+         * @param param9
+         * @return the return value/result of the invoked method
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         @SneakyThrows
         default RETURN invokeWithSneakyThrows(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8, @NonNull @NotNull PARAM9 param9){
             return invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9);
