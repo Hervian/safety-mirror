@@ -50,6 +50,18 @@ import java.lang.reflect.Method;
  *
  * <code>java.lang.Method method = Fun.toMethod(SomeClassOrObject::someMethod);</code>
  *
+ * Please be aware that there are 2 situations where you must help the compiler choose the correct overloaded method.
+ *
+ * 1.
+ * When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method
+ * by specifying the parameters and return value in generics. This is fx the case with this call:
+ * <code>Fun.<String>toMethod(Class::forName)</code></ol>
+ *
+ * 2.
+ * When targeting a method with varargs you must cast the Method Reference to help the compiler choose
+ * the correct overloaded toMethod method, Fx:
+ * <code>Method m = Fun.toMethod((Fun.With1ParamAndVoid<String[]>)new FunToMethodTest()::methodThatTakesAVarargParam);</code>
+ *
  * </pre>
  * @author Anders Granau Høfft
  */
@@ -59,15 +71,66 @@ public interface Fun<RETURN> extends Serializable {
         return SerializedLambdaToMethod.createMethodFromSuperConsumer(this);
     }
 
+    /**
+     * <pre>
+     * Usage:
+     * <code>java.lang.Method method = Fun.toMethod(SomeClassOrObject::someMethod);</code>
+     *
+     * Don't worry too much about the large number of overloaded toMethod methods. The overloading is an implementation
+     * detail. That being said, pay attention to below corner cases.
+     *
+     * Please be aware that there are 2 situations where you must help the compiler choose the correct overloaded method.
+     *
+     * 1.
+     * When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method
+     * by specifying the parameters and return value in generics. This is fx the case with this call:
+     * <code>Fun.<String>toMethod(Class::forName)</code></ol>
+     *
+     * 2.
+     * When targeting a method with varargs you must cast the Method Reference to help the compiler choose
+     * the correct overloaded toMethod method, Fx:
+     * <code>Method m = Fun.toMethod((Fun.With1ParamAndVoid<String[]>)new FunToMethodTest()::methodThatTakesAVarargParam);</code>
+     *
+     * </pre>
+     * @see Fun
+     */
     static <DUMMY> Method toMethod(Fun.With0ParamsAndVoid<DUMMY> methodRef) { return SerializedLambdaToMethod.createMethodFromSuperConsumer(methodRef); }
+
+    /**
+     * @see Fun#toMethod(With0ParamsAndVoid)
+     */
     static <T1> Method toMethod(Fun.With1ParamAndVoid<T1> methodRef) { return SerializedLambdaToMethod.createMethodFromSuperConsumer(methodRef); }
+    /**
+     * @see Fun#toMethod(With0ParamsAndVoid)
+     */
     static <T1, T2> Method toMethod(Fun.With2ParamsAndVoid<T1, T2> methodRef) { return SerializedLambdaToMethod.createMethodFromSuperConsumer(methodRef); }
+    /**
+     * @see Fun#toMethod(With0ParamsAndVoid)
+     */
     static <T1, T2, T3> Method toMethod(Fun.With3ParamsAndVoid<T1, T2, T3> methodRef) { return SerializedLambdaToMethod.createMethodFromSuperConsumer(methodRef); }
+    /**
+     * @see Fun#toMethod(With0ParamsAndVoid)
+     */
     static <T1, T2, T3, T4> Method toMethod(Fun.With4ParamsAndVoid<T1, T2, T3, T4> methodRef) { return SerializedLambdaToMethod.createMethodFromSuperConsumer(methodRef); }
+    /**
+     * @see Fun#toMethod(With0ParamsAndVoid)
+     */
     static <T1, T2, T3, T4, T5> Method toMethod(Fun.With5ParamsAndVoid<T1, T2, T3, T4, T5> methodRef) { return SerializedLambdaToMethod.createMethodFromSuperConsumer(methodRef); }
+    /**
+     * @see Fun#toMethod(With0ParamsAndVoid)
+     */
     static <T1, T2, T3, T4, T5, T6> Method toMethod(Fun.With6ParamsAndVoid<T1, T2, T3, T4, T5, T6> methodRef) { return SerializedLambdaToMethod.createMethodFromSuperConsumer(methodRef); }
+    /**
+     * @see Fun#toMethod(With0ParamsAndVoid)
+     */
     static <T1, T2, T3, T4, T5, T6, T7> Method toMethod(Fun.With7ParamsAndVoid<T1, T2, T3, T4, T5, T6, T7> methodRef) { return SerializedLambdaToMethod.createMethodFromSuperConsumer(methodRef); }
+    /**
+     * @see Fun#toMethod(With0ParamsAndVoid)
+     */
     static <T1, T2, T3, T4, T5, T6, T7, T8> Method toMethod(Fun.With8ParamsAndVoid<T1, T2, T3, T4, T5, T6, T7, T8> methodRef) { return SerializedLambdaToMethod.createMethodFromSuperConsumer(methodRef); }
+    /**
+     * @see Fun#toMethod(With0ParamsAndVoid)
+     */
     static <T1, T2, T3, T4, T5, T6, T7, T8, T9> Method toMethod(Fun.With9ParamsAndVoid<T1, T2, T3, T4, T5, T6, T7, T8, T9> methodRef) { return SerializedLambdaToMethod.createMethodFromSuperConsumer(methodRef); }
 
     /**
@@ -78,7 +141,7 @@ public interface Fun<RETURN> extends Serializable {
      *
      * @param consumer A Method Reference, typically in the form using the double colon syntax, fx String::isEmpty
      * @param <DUMMY> A dummy generic value created to satisfy the compiler, which will otherwise get confused and be unable to choose the correct overloaded getName method,
-     * @return
+     * @return the method name
      */
     static <DUMMY> String getName(Fun.With0ParamsAndVoid<DUMMY> consumer) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(consumer); }
 
@@ -150,6 +213,11 @@ public interface Fun<RETURN> extends Serializable {
     interface With1Param<RETURN, PARAM1> extends Fun<RETURN> {
         RETURN invoke(@NonNull @NotNull PARAM1 param1) throws Exception;
 
+        /**
+         * @param param1
+         * @return the return value/result of the invoked method
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         @SneakyThrows
         default RETURN invokeWithSneakyThrows(@NonNull @NotNull PARAM1 param1){
             return invoke(param1);
@@ -163,6 +231,10 @@ public interface Fun<RETURN> extends Serializable {
     interface With1ParamAndVoid<PARAM1> extends Fun<Void> {
         void invoke(@NonNull @NotNull PARAM1 param1) throws Exception;
 
+        /**
+         * @param param1
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         @SneakyThrows
         default void invokeWithSneakyThrows(@NonNull @NotNull PARAM1 param1){
             invoke(param1);
@@ -186,6 +258,11 @@ public interface Fun<RETURN> extends Serializable {
     interface With2ParamsAndVoid<PARAM1, PARAM2> extends Fun<Void> {
         void invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2) throws Exception;
 
+        /**
+         * @param param1
+         * @param param2
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         @SneakyThrows
         default void invokeWithSneakyThrows(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2){
             invoke(param1, param2);
@@ -209,6 +286,12 @@ public interface Fun<RETURN> extends Serializable {
     interface With3ParamsAndVoid<PARAM1, PARAM2, PARAM3> extends Fun<Void> {
         void invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3) throws Exception;
 
+        /**
+         * @param param1
+         * @param param2
+         * @param param3
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         @SneakyThrows
         default void invokeWithSneakyThrows(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3){
             invoke(param1, param2, param3);
@@ -232,6 +315,13 @@ public interface Fun<RETURN> extends Serializable {
     interface With4ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4> extends Fun<Void> {
         void invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4) throws Exception;
 
+        /**
+         * @param param1
+         * @param param2
+         * @param param3
+         * @param param4
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         @SneakyThrows
         default void invokeWithSneakyThrows(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4){
             invoke(param1, param2, param3, param4);
@@ -255,6 +345,14 @@ public interface Fun<RETURN> extends Serializable {
     interface With5ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5> extends Fun<Void> {
         void invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5) throws Exception;
 
+        /**
+         * @param param1
+         * @param param2
+         * @param param3
+         * @param param4
+         * @param param5
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         @SneakyThrows
         default void invokeWithSneakyThrows(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5){
             invoke(param1, param2, param3, param4, param5);
@@ -278,6 +376,15 @@ public interface Fun<RETURN> extends Serializable {
     interface With6ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6> extends Fun<Void> {
         void invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6) throws Exception;
 
+        /**
+         * @param param1
+         * @param param2
+         * @param param3
+         * @param param4
+         * @param param5
+         * @param param6
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         @SneakyThrows
         default void invokeWithSneakyThrows(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6){
             invoke(param1, param2, param3, param4, param5, param6);
@@ -301,6 +408,16 @@ public interface Fun<RETURN> extends Serializable {
     interface With7ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7> extends Fun<Void> {
         void invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7) throws Exception;
 
+        /**
+         * @param param1
+         * @param param2
+         * @param param3
+         * @param param4
+         * @param param5
+         * @param param6
+         * @param param7
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         @SneakyThrows
         default void invokeWithSneakyThrows(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7){
             invoke(param1, param2, param3, param4, param5, param6, param7);
@@ -324,6 +441,17 @@ public interface Fun<RETURN> extends Serializable {
     interface With8ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7, PARAM8> extends Fun<Void> {
         void invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8) throws Exception;
 
+        /**
+         * @param param1
+         * @param param2
+         * @param param3
+         * @param param4
+         * @param param5
+         * @param param6
+         * @param param7
+         * @param param8
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         @SneakyThrows
         default void invokeWithSneakyThrows(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8){
             invoke(param1, param2, param3, param4, param5, param6, param7, param8);
@@ -347,6 +475,18 @@ public interface Fun<RETURN> extends Serializable {
     interface With9ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7, PARAM8, PARAM9> extends Fun<Void> {
         void invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8, @NonNull @NotNull PARAM9 param9) throws Exception;
 
+        /**
+         * @param param1
+         * @param param2
+         * @param param3
+         * @param param4
+         * @param param5
+         * @param param6
+         * @param param7
+         * @param param8
+         * @param param9
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         @SneakyThrows
         default void invokeWithSneakyThrows(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8, @NonNull @NotNull PARAM9 param9){
             invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9);
