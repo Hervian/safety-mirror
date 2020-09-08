@@ -169,6 +169,18 @@ Key points:
      exceptions (`boolean oneOrMoreExceptionsThrown = myDelegateInvocationResultInstance.isOneOrMoreExceptionsThrown()`).
   1. As always with Java Generics you must remember to add the diamond `<>` operator to the right hand side in order for the 
      compiler to be able to correctly infer the generic type.
+  1. Be aware that the invoke method's parameters are all marked as `@NotNull`/`@Nonnull` and that this is enforced in the code: 
+    You will get a NullPointerException if one or more of your parameters are null. This is an API decision that may (or may not)
+    change once Project Valhalla is completed - it depends on what that project exactly involves. 
+    The reason for this API decision is that the user might otherwise experience **unexpected** NPE's for some 
+    corner cases that involves autoboxing of primitive types. 
+    Take the following example, and assume that the class called `MyClass` contains a static void method that has 
+    one *int* parameter. Then the following will compile just fine due to autoboxing: 
+    `Delegate.With1ParamAndVoid<Integer> del = new Delegate.With1ParamAndVoid(MyClass::myMethod)`  
+    This can cause an unexpected NullPointerException (i.e. a runtime exception) if the creator of the delegate invokes it
+    with null (since `myMethod` accepts an int, and null cannot be turned into an int). 
+    From the point of view of the Delegate this is perfectyl fine - it's generics specify Integer, which 
+    can be null. But when invoking the underlying method this would throw an NPE. To han 
     
 Functions added to a delegate can be removed again, but be aware that a reference to the function is needed.
 
@@ -221,16 +233,39 @@ Notice that you have to provide the method parameters in generics under certain 
 (When the method is overloaded, or if the method has a varargs parameter).    
 
 ### Known limitations and workarounds
-The static overloaded Fun.toMethod methods does for some corner cases not compile when varargs is involved.
-To solve this, one must help the compiler by casting:  
-`Method m = Fun.toMethod((Fun.With1ParamAndVoid<String[]>)new FunToMethodTest()::methodThatTakesAVarargParam); //When varargs is involved you are unfortunately forced to cast to avoid an "Ambiguous method call" error.`  
+#### Nulls
+Please be aware that all parameters of all the invoke methods (of both the Fun types and Delegate types) 
+are annotated `NonNull`/`@NotNull` and that runtime null checks will make sure it is respected. - in other words:
+don't use nulls. Create Optionals for your signature if nulls oif you have the need. See details on why this is in below 
+notes on primitives.  
+
+#### Varargs
+* The static overloaded Fun.toMethod methods cannot compile (out of the box) when the target method contains varargs.
+To solve this, one must help the compiler by explicit casting:  
+`Method m = Fun.toMethod((Fun.With1ParamAndVoid<String[]>)new FunToMethodTest()::methodThatTakesAVarargParam); //When varargs is involved you are unfortunately forced to cast to avoid an "Ambiguous method call" error.`    
+
 Elaboration:  
-Take for example the following method:
+Take for example the following method:  
 `public void foo(String... stringArray){...}`  
+
 The following won't compile:  
 `Method m = Fun.<String[]>toMethod(this::foo);`  
-The reason is that the compiler can't find the correct overloaded method (With1ParamAndVoid<String[]>). This is the compiler error:  
+
+The reason is that the compiler can't find the correct overloaded method (`Fun.With1ParamAndVoid<String[]>`). 
+This is the compiler error:    
 `Ambiguous method call. Both toMethod(With0ParamsAndVoid<Object>) in Fun and toMethod(With1ParamAndVoid<Object>) in Fun match`
+
+#### Primitive types
+Generics only allow Objects/Reference types, not primitive types. (This may change once Project Valhalla is completed.)   
+You can, however, pass any signature containing primitive params to a Fun type that has the corresponding boxed types.   
+Fx, if you defined the type `Fun.With1Param<Integer>`, then you can successfully assign a Method Reference to a method whose single param is primitive `int`.
+  
+In a way this is great - primitives are supported via autoboxing. But it also involves a pitfall. What if the method
+defining the Fun type invokes the given function using null? (Which is acceptable from the point of view of the type - 
+it's generics specify an Integer parameter, and Integer may be null.) A NullPointerException will off course occur.   
+To tackle this the API have annotated all parameters of invocation methods (I.e. both the Fun types and the Delegate types)
+with various NonNull / NotNull annotations (Remember to activate your IDEs annotation processor and nullness checks).   
+Further, all invoke methods of the Delegate object has a null check and will throw a NullPointerException when passing one or more nulls.
 
 ## Related projects
 * [lambda-factory](https://github.com/Hervian/lambda-factory): a fast alternative to [Reflection](https://docs.oracle.com/javase/9/docs/api/java/lang/reflect/package-summary.html-based) based method invocation.

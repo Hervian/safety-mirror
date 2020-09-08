@@ -1,6 +1,8 @@
 package com.github.hervian.reflection;
 
+import lombok.NonNull;
 import lombok.SneakyThrows;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -204,11 +206,11 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
-        public DelegateInvocationResult<RETURN> invoke(PARAM1 param1) throws Exception {
+        public DelegateInvocationResult<RETURN> invoke(@NonNull @NotNull PARAM1 param1) throws Exception {
             return super.invoke(param1);
         }
 
-        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(PARAM1 param1) {
+        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1) {
             return super.invokeAndAggregateExceptions(param1);
         }
 
@@ -223,11 +225,11 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
-        public DelegateInvocationResult<Void> invoke(PARAM1 param1) throws Exception {
+        public DelegateInvocationResult<Void> invoke(@NonNull @NotNull PARAM1 param1) throws Exception {
             return super.invoke(param1);
         }
 
-        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(PARAM1 param1) {
+        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1) {
             return super.invokeAndAggregateExceptions(param1);
         }
 
@@ -244,11 +246,11 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
-        public DelegateInvocationResult<RETURN> invoke(PARAM1 param1, PARAM2 param2) throws Exception {
+        public DelegateInvocationResult<RETURN> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2) throws Exception {
             return super.invoke(param1, param2);
         }
 
-        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2) {
+        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2) {
             return super.invokeAndAggregateExceptions(param1, param2);
         }
 
@@ -263,11 +265,11 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
-        public DelegateInvocationResult<Void> invoke(PARAM1 param1, PARAM2 param2) throws Exception {
+        public DelegateInvocationResult<Void> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2) throws Exception {
             return super.invoke(param1, param2);
         }
 
-        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2) {
+        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2) {
             return super.invokeAndAggregateExceptions(param1, param2);
         }
 
@@ -284,11 +286,12 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
-        public DelegateInvocationResult<RETURN> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3) throws Exception {
+
+        public DelegateInvocationResult<RETURN> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3) throws Exception {
             return super.invoke(param1, param2, param3);
         }
 
-        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3) {
+        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3) {
             return super.invokeAndAggregateExceptions(param1, param2, param3);
         }
 
@@ -303,11 +306,11 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
-        public DelegateInvocationResult<Void> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3) throws Exception {
+        public DelegateInvocationResult<Void> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3) throws Exception {
             return super.invoke(param1, param2, param3);
         }
 
-        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3) {
+        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3) {
             return super.invokeAndAggregateExceptions(param1, param2, param3);
         }
 
@@ -324,11 +327,11 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
-        public DelegateInvocationResult<RETURN> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4) throws Exception {
+        public DelegateInvocationResult<RETURN> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4) throws Exception {
             return super.invoke(param1, param2, param3, param4);
         }
 
-        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4) {
+        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4) {
             return super.invokeAndAggregateExceptions(param1, param2, param3, param4);
         }
 
@@ -343,11 +346,11 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
-        public DelegateInvocationResult<Void> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4) throws Exception {
+        public DelegateInvocationResult<Void> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4) throws Exception {
             return super.invoke(param1, param2, param3, param4);
         }
 
-        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4) {
+        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4) {
             return super.invokeAndAggregateExceptions(param1, param2, param3, param4);
         }
 
@@ -364,11 +367,11 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
-        public DelegateInvocationResult<RETURN> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5) throws Exception {
+        public DelegateInvocationResult<RETURN> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5) throws Exception {
             return super.invoke(param1, param2, param3, param4, param5);
         }
 
-        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5) {
+        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5) {
             return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5);
         }
 
@@ -383,11 +386,11 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
-        public DelegateInvocationResult<Void> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5) throws Exception {
+        public DelegateInvocationResult<Void> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5) throws Exception {
             return super.invoke(param1, param2, param3, param4, param5);
         }
 
-        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5) {
+        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5) {
             return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5);
         }
 
@@ -404,11 +407,11 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
-        public DelegateInvocationResult<RETURN> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6) throws Exception {
+        public DelegateInvocationResult<RETURN> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6) throws Exception {
             return super.invoke(param1, param2, param3, param4, param5, param6);
         }
 
-        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6) {
+        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6) {
             return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5, param6);
         }
 
@@ -423,11 +426,11 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
-        public DelegateInvocationResult<Void> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6) throws Exception {
+        public DelegateInvocationResult<Void> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6) throws Exception {
             return super.invoke(param1, param2, param3, param4, param5, param6);
         }
 
-        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6) {
+        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6) {
             return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5, param6);
         }
 
@@ -444,11 +447,11 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
-        public DelegateInvocationResult<RETURN> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7) throws Exception {
+        public DelegateInvocationResult<RETURN> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7) throws Exception {
             return super.invoke(param1, param2, param3, param4, param5, param6, param7);
         }
 
-        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7) {
+        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7) {
             return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5, param6, param7);
         }
 
@@ -463,11 +466,11 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
-        public DelegateInvocationResult<Void> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7) throws Exception {
+        public DelegateInvocationResult<Void> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7) throws Exception {
             return super.invoke(param1, param2, param3, param4, param5, param6, param7);
         }
 
-        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7) {
+        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7) {
             return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5, param6, param7);
         }
 
@@ -484,11 +487,11 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
-        public DelegateInvocationResult<RETURN> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8) throws Exception {
+        public DelegateInvocationResult<RETURN> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8) throws Exception {
             return super.invoke(param1, param2, param3, param4, param5, param6, param7, param8);
         }
 
-        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8) {
+        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8) {
             return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5, param6, param7, param8);
         }
 
@@ -503,11 +506,11 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
-        public DelegateInvocationResult<Void> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8) throws Exception {
+        public DelegateInvocationResult<Void> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8) throws Exception {
             return super.invoke(param1, param2, param3, param4, param5, param6, param7, param8);
         }
 
-        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8) {
+        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8) {
             return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5, param6, param7, param8);
         }
 
@@ -524,11 +527,11 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
-        public DelegateInvocationResult<RETURN> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8, PARAM9 param9) throws Exception {
+        public DelegateInvocationResult<RETURN> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8, @NonNull @NotNull PARAM9 param9) throws Exception {
             return super.invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9);
         }
 
-        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8, PARAM9 param9) {
+        public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8, @NonNull @NotNull PARAM9 param9) {
             return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5, param6, param7, param8, param9);
         }
 
@@ -543,11 +546,11 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
-        public DelegateInvocationResult<Void> invoke(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8, PARAM9 param9) throws Exception {
+        public DelegateInvocationResult<Void> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8, @NonNull @NotNull PARAM9 param9) throws Exception {
             return super.invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9);
         }
 
-        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(PARAM1 param1, PARAM2 param2, PARAM3 param3, PARAM4 param4, PARAM5 param5, PARAM6 param6, PARAM7 param7, PARAM8 param8, PARAM9 param9) {
+        public DelegateInvocationResult<Void> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8, @NonNull @NotNull PARAM9 param9) {
             return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5, param6, param7, param8, param9);
         }
 
