@@ -22,7 +22,7 @@ public class FunToMethodTest {
          * Below assert will fail if the MethodRef.With0Params.Void is NOT generic, hence the dummy value. Apparently the compiler gets confused and cannot choose the proper one (which is MethodRef.with2Params.Void). Very strange...
          */
         assertNotNull(Fun.<String, Class<?>[]>toMethod(getClass()::getDeclaredMethod)); // to get vararg method you must specify parameters in generics
-        assertNotNull(Fun.<String>toMethod(Class::forName)); 	   // to get overlaoded method you must specify parameters in generics
+        assertNotNull(Fun.<String>toMethod(Class::forName)); 	   // to get overloaded method you must specify parameters in generics
         assertNotNull(Fun.toMethod(this::toString));             //Works with inherited methods
              
         assertNotNull(Fun.toMethod(FunToMethodTest::testCreateMethod));

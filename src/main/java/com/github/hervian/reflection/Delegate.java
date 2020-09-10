@@ -206,10 +206,22 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
+        /**
+         *
+         * @param param1
+         * @return
+         * @throws NullPointerException if one or more of the arguments are null
+         * @throws Exception if one of the invoked functions throws an Exception
+         */
         public DelegateInvocationResult<RETURN> invoke(@NonNull @NotNull PARAM1 param1) throws Exception {
             return super.invoke(param1);
         }
 
+        /**
+         * @param param1
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1) {
             return super.invokeAndAggregateExceptions(param1);
         }
