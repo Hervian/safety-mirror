@@ -209,7 +209,7 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
         /**
          *
          * @param param1
-         * @return
+         * @return the return value of the function being invoked
          * @throws NullPointerException if one or more of the arguments are null
          * @throws Exception if one of the invoked functions throws an Exception
          */

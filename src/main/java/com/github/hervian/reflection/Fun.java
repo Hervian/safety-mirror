@@ -187,8 +187,15 @@ public interface Fun<RETURN> extends Serializable {
 
     @FunctionalInterface
     interface With0Params<RETURN> extends Fun<RETURN> {
+        /**
+         * @return the return value/result of the invoked method
+         * @throws Exception if the invoked functions throws an Exception
+         */
         RETURN invoke() throws Exception;
 
+        /**
+         * @return the return value/result of the invoked method
+         */
         @SneakyThrows
         default RETURN invokeWithSneakyThrows(){
             return invoke();
@@ -201,8 +208,11 @@ public interface Fun<RETURN> extends Serializable {
      */
     @FunctionalInterface
     interface With0ParamsAndVoid<DUMMY> extends Fun<Void> { // A note on the DUMMY generic value: It was the only way to make the following jUnit assert pass: assertNotNull(Types2.<String, Class<?>[]>createMethod(getClass()::getDeclaredMethod)); See comment in DelegateTest
+        /**
+         * @throws Exception if the invoked functions throws an Exception
+         */
         void invoke() throws Exception;
-
+        
         @SneakyThrows
         default void invokeWithSneakyThrows(){
             invoke();
@@ -211,11 +221,16 @@ public interface Fun<RETURN> extends Serializable {
 
     @FunctionalInterface
     interface With1Param<RETURN, PARAM1> extends Fun<RETURN> {
+        /**
+         * @param param1 (not null)
+         * @return the return value/result of the invoked method
+         * @throws Exception if the invoked functions throws an Exception 
+         */
         RETURN invoke(@NonNull @NotNull PARAM1 param1) throws Exception;
 
         /**
-         * @param param1
-         * @return the return value/result of the invoked method
+         * @param param1 (not null)
+         * @return the return value/result of the invoked method 
          * @throws NullPointerException if one or more of the arguments are null
          */
         @SneakyThrows
@@ -229,10 +244,14 @@ public interface Fun<RETURN> extends Serializable {
      */
     @FunctionalInterface
     interface With1ParamAndVoid<PARAM1> extends Fun<Void> {
+        /**
+         * @param param1 (not null)
+         * @throws Exception if the invoked functions throws an Exception
+         */
         void invoke(@NonNull @NotNull PARAM1 param1) throws Exception;
 
         /**
-         * @param param1
+         * @param param1 (not null)
          * @throws NullPointerException if one or more of the arguments are null
          */
         @SneakyThrows
@@ -243,12 +262,18 @@ public interface Fun<RETURN> extends Serializable {
 
     @FunctionalInterface
     interface With2Params<RETURN, PARAM1, PARAM2> extends Fun<RETURN> {
+        /**
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @return the return value/result of the invoked method
+         * @throws Exception if the invoked functions throws an Exception
+         */
         RETURN invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2) throws Exception;
 
         /**
-         * @param param1
-         * @param param2
-         * @return the return value/result of the invoked method
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @return the return value/result of the invoked method 
          * @throws NullPointerException if one or more of the arguments are null
          */
         @SneakyThrows
@@ -262,11 +287,16 @@ public interface Fun<RETURN> extends Serializable {
      */
     @FunctionalInterface
     interface With2ParamsAndVoid<PARAM1, PARAM2> extends Fun<Void> {
+        /**
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @throws Exception if the invoked functions throws an Exception
+         */
         void invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2) throws Exception;
 
         /**
-         * @param param1
-         * @param param2
+         * @param param1 (not null)
+         * @param param2 (not null)
          * @throws NullPointerException if one or more of the arguments are null
          */
         @SneakyThrows
@@ -277,13 +307,20 @@ public interface Fun<RETURN> extends Serializable {
 
     @FunctionalInterface
     interface With3Params<RETURN, PARAM1, PARAM2, PARAM3> extends Fun<RETURN> {
+        /**
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @return the return value/result of the invoked method
+         * @throws Exception if the invoked functions throws an Exception
+         */
         RETURN invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3) throws Exception;
 
         /**
-         * @param param1
-         * @param param2
-         * @param param3
-         * @return the return value/result of the invoked method
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @return the return value/result of the invoked method 
          * @throws NullPointerException if one or more of the arguments are null
          */
         @SneakyThrows
@@ -297,12 +334,18 @@ public interface Fun<RETURN> extends Serializable {
      */
     @FunctionalInterface
     interface With3ParamsAndVoid<PARAM1, PARAM2, PARAM3> extends Fun<Void> {
+        /**
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @throws Exception if the invoked functions throws an Exception
+         */
         void invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3) throws Exception;
 
         /**
-         * @param param1
-         * @param param2
-         * @param param3
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
          * @throws NullPointerException if one or more of the arguments are null
          */
         @SneakyThrows
@@ -313,14 +356,22 @@ public interface Fun<RETURN> extends Serializable {
 
     @FunctionalInterface
     interface With4Params<RETURN, PARAM1, PARAM2, PARAM3, PARAM4> extends Fun<RETURN> {
+        /**
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @param param4 (not null)
+         * @return the return value/result of the invoked method
+         * @throws Exception if the invoked functions throws an Exception
+         */
         RETURN invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4) throws Exception;
 
         /**
-         * @param param1
-         * @param param2
-         * @param param3
-         * @param param4
-         * @return the return value/result of the invoked method
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @param param4 (not null)
+         * @return the return value/result of the invoked method 
          * @throws NullPointerException if one or more of the arguments are null
          */
         @SneakyThrows
@@ -334,13 +385,20 @@ public interface Fun<RETURN> extends Serializable {
      */
     @FunctionalInterface
     interface With4ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4> extends Fun<Void> {
+        /**
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @param param4 (not null)
+         * @throws Exception if the invoked functions throws an Exception
+         */
         void invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4) throws Exception;
 
         /**
-         * @param param1
-         * @param param2
-         * @param param3
-         * @param param4
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @param param4 (not null)
          * @throws NullPointerException if one or more of the arguments are null
          */
         @SneakyThrows
@@ -351,15 +409,24 @@ public interface Fun<RETURN> extends Serializable {
 
     @FunctionalInterface
     interface With5Params<RETURN, PARAM1, PARAM2, PARAM3, PARAM4, PARAM5> extends Fun<RETURN> {
+        /**
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @param param4 (not null)
+         * @param param5 (not null)
+         * @return the return value/result of the invoked method
+         * @throws Exception if the invoked functions throws an Exception
+         */
         RETURN invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5) throws Exception;
 
         /**
-         * @param param1
-         * @param param2
-         * @param param3
-         * @param param4
-         * @param param5
-         * @return the return value/result of the invoked method
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @param param4 (not null)
+         * @param param5 (not null)
+         * @return the return value/result of the invoked method 
          * @throws NullPointerException if one or more of the arguments are null
          */
         @SneakyThrows
@@ -373,14 +440,22 @@ public interface Fun<RETURN> extends Serializable {
      */
     @FunctionalInterface
     interface With5ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5> extends Fun<Void> {
+        /**
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @param param4 (not null)
+         * @param param5 (not null)
+         * @throws Exception if the invoked functions throws an Exception
+         */
         void invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5) throws Exception;
 
         /**
-         * @param param1
-         * @param param2
-         * @param param3
-         * @param param4
-         * @param param5
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @param param4 (not null)
+         * @param param5 (not null)
          * @throws NullPointerException if one or more of the arguments are null
          */
         @SneakyThrows
@@ -391,16 +466,26 @@ public interface Fun<RETURN> extends Serializable {
 
     @FunctionalInterface
     interface With6Params<RETURN, PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6> extends Fun<RETURN> {
+        /**
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @param param4 (not null)
+         * @param param5 (not null)
+         * @param param6 (not null)
+         * @return the return value/result of the invoked method
+         * @throws Exception if the invoked functions throws an Exception
+         */
         RETURN invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6) throws Exception;
 
         /**
-         * @param param1
-         * @param param2
-         * @param param3
-         * @param param4
-         * @param param5
-         * @param param6
-         * @return the return value/result of the invoked method
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @param param4 (not null)
+         * @param param5 (not null)
+         * @param param6 (not null)
+         * @return the return value/result of the invoked method 
          * @throws NullPointerException if one or more of the arguments are null
          */
         @SneakyThrows
@@ -414,15 +499,24 @@ public interface Fun<RETURN> extends Serializable {
      */
     @FunctionalInterface
     interface With6ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6> extends Fun<Void> {
+        /**
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @param param4 (not null)
+         * @param param5 (not null)
+         * @param param6 (not null)
+         * @throws Exception if the invoked functions throws an Exception
+         */
         void invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6) throws Exception;
 
         /**
-         * @param param1
-         * @param param2
-         * @param param3
-         * @param param4
-         * @param param5
-         * @param param6
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @param param4 (not null)
+         * @param param5 (not null)
+         * @param param6 (not null)
          * @throws NullPointerException if one or more of the arguments are null
          */
         @SneakyThrows
@@ -433,17 +527,28 @@ public interface Fun<RETURN> extends Serializable {
 
     @FunctionalInterface
     interface With7Params<RETURN, PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7> extends Fun<RETURN> {
+        /**
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @param param4 (not null)
+         * @param param5 (not null)
+         * @param param6 (not null)
+         * @param param7 (not null)
+         * @return the return value/result of the invoked method
+         * @throws Exception if the invoked functions throws an Exception
+         */
         RETURN invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7) throws Exception;
 
         /**
-         * @param param1
-         * @param param2
-         * @param param3
-         * @param param4
-         * @param param5
-         * @param param6
-         * @param param7
-         * @return the return value/result of the invoked method
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @param param4 (not null)
+         * @param param5 (not null)
+         * @param param6 (not null)
+         * @param param7 (not null)
+         * @return the return value/result of the invoked method 
          * @throws NullPointerException if one or more of the arguments are null
          */
         @SneakyThrows
@@ -457,16 +562,26 @@ public interface Fun<RETURN> extends Serializable {
      */
     @FunctionalInterface
     interface With7ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7> extends Fun<Void> {
+        /**
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @param param4 (not null)
+         * @param param5 (not null)
+         * @param param6 (not null)
+         * @param param7 (not null)
+         * @throws Exception if the invoked functions throws an Exception
+         */
         void invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7) throws Exception;
 
         /**
-         * @param param1
-         * @param param2
-         * @param param3
-         * @param param4
-         * @param param5
-         * @param param6
-         * @param param7
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @param param4 (not null)
+         * @param param5 (not null)
+         * @param param6 (not null)
+         * @param param7 (not null)
          * @throws NullPointerException if one or more of the arguments are null
          */
         @SneakyThrows
@@ -477,18 +592,30 @@ public interface Fun<RETURN> extends Serializable {
 
     @FunctionalInterface
     interface With8Params<RETURN, PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7, PARAM8> extends Fun<RETURN> {
+        /**
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @param param4 (not null)
+         * @param param5 (not null)
+         * @param param6 (not null)
+         * @param param7 (not null)
+         * @param param8 (not null)
+         * @return the return value/result of the invoked method
+         * @throws Exception if the invoked functions throws an Exception
+         */
         RETURN invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8) throws Exception;
 
         /**
-         * @param param1
-         * @param param2
-         * @param param3
-         * @param param4
-         * @param param5
-         * @param param6
-         * @param param7
-         * @param param8
-         * @return the return value/result of the invoked method
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @param param4 (not null)
+         * @param param5 (not null)
+         * @param param6 (not null)
+         * @param param7 (not null)
+         * @param param8 (not null)
+         * @return the return value/result of the invoked method 
          * @throws NullPointerException if one or more of the arguments are null
          */
         @SneakyThrows
@@ -502,17 +629,28 @@ public interface Fun<RETURN> extends Serializable {
      */
     @FunctionalInterface
     interface With8ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7, PARAM8> extends Fun<Void> {
+        /**
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @param param4 (not null)
+         * @param param5 (not null)
+         * @param param6 (not null)
+         * @param param7 (not null)
+         * @param param8 (not null)
+         * @throws Exception if the invoked functions throws an Exception
+         */
         void invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8) throws Exception;
 
         /**
-         * @param param1
-         * @param param2
-         * @param param3
-         * @param param4
-         * @param param5
-         * @param param6
-         * @param param7
-         * @param param8
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @param param4 (not null)
+         * @param param5 (not null)
+         * @param param6 (not null)
+         * @param param7 (not null)
+         * @param param8 (not null)
          * @throws NullPointerException if one or more of the arguments are null
          */
         @SneakyThrows
@@ -523,19 +661,32 @@ public interface Fun<RETURN> extends Serializable {
 
     @FunctionalInterface
     interface With9Params<RETURN, PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7, PARAM8, PARAM9> extends Fun<RETURN> {
+        /**
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @param param4 (not null)
+         * @param param5 (not null)
+         * @param param6 (not null)
+         * @param param7 (not null)
+         * @param param8 (not null)
+         * @param param9 (not null)
+         * @return the return value/result of the invoked method
+         * @throws Exception if the invoked functions throws an Exception
+         */
         RETURN invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8, @NonNull @NotNull PARAM9 param9) throws Exception;
 
         /**
-         * @param param1
-         * @param param2
-         * @param param3
-         * @param param4
-         * @param param5
-         * @param param6
-         * @param param7
-         * @param param8
-         * @param param9
-         * @return the return value/result of the invoked method
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @param param4 (not null)
+         * @param param5 (not null)
+         * @param param6 (not null)
+         * @param param7 (not null)
+         * @param param8 (not null)
+         * @param param9 (not null)
+         * @return the return value/result of the invoked method 
          * @throws NullPointerException if one or more of the arguments are null
          */
         @SneakyThrows
@@ -549,18 +700,30 @@ public interface Fun<RETURN> extends Serializable {
      */
     @FunctionalInterface
     interface With9ParamsAndVoid<PARAM1, PARAM2, PARAM3, PARAM4, PARAM5, PARAM6, PARAM7, PARAM8, PARAM9> extends Fun<Void> {
+        /**
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @param param4 (not null)
+         * @param param5 (not null)
+         * @param param6 (not null)
+         * @param param7 (not null)
+         * @param param8 (not null)
+         * @param param9 (not null)
+         * @throws Exception if the invoked functions throws an Exception
+         */
         void invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8, @NonNull @NotNull PARAM9 param9) throws Exception;
 
         /**
-         * @param param1
-         * @param param2
-         * @param param3
-         * @param param4
-         * @param param5
-         * @param param6
-         * @param param7
-         * @param param8
-         * @param param9
+         * @param param1 (not null)
+         * @param param2 (not null)
+         * @param param3 (not null)
+         * @param param4 (not null)
+         * @param param5 (not null)
+         * @param param6 (not null)
+         * @param param7 (not null)
+         * @param param8 (not null)
+         * @param param9 (not null)
          * @throws NullPointerException if one or more of the arguments are null
          */
         @SneakyThrows
