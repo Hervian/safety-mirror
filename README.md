@@ -2,7 +2,7 @@
 Fun with Delegates, Events and type safe [Method](https://docs.oracle.com/javase/9/docs/api/java/lang/reflect/Method.html) creation.
 
 ## Releases
-Available in [Maven Central](https://search.maven.org/search?q=g:%22com.github.hervian%22%3D%20AND%20a:%22safety-mirror%22%3D):
+Available in [Maven Central](https://search.maven.org/search?q=g:%22com.github.hervian%22%3D%20AND%20a:%22safety-mirror%22%3D) and [mvnrepository.com](https://mvnrepository.com/artifact/com.github.hervian/safety-mirror):
 ```
 <dependency>
   <groupId>com.github.hervian</groupId>
