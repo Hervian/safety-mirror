@@ -55,12 +55,12 @@ import java.lang.reflect.Method;
  * 1.
  * When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method
  * by specifying the parameters and return value in generics. This is fx the case with this call:
- * <code>Fun.<String>toMethod(Class::forName)</code></ol>
+ * <code>Fun.&lt;String&gt;toMethod(Class::forName)</code>
  *
  * 2.
  * When targeting a method with varargs you must cast the Method Reference to help the compiler choose
  * the correct overloaded toMethod method, Fx:
- * <code>Method m = Fun.toMethod((Fun.With1ParamAndVoid<String[]>)new FunToMethodTest()::methodThatTakesAVarargParam);</code>
+ * <code>Method m = Fun.toMethod((Fun.With1ParamAndVoid&lt;String[]&gt;)new FunToMethodTest()::methodThatTakesAVarargParam);</code>
  *
  * </pre>
  * @author Anders Granau Høfft
@@ -84,52 +84,128 @@ public interface Fun<RETURN> extends Serializable {
      * 1.
      * When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method
      * by specifying the parameters and return value in generics. This is fx the case with this call:
-     * <code>Fun.<String>toMethod(Class::forName)</code></ol>
+     * <code>Fun.&lt;String&gt;toMethod(Class::forName)</code>
      *
      * 2.
      * When targeting a method with varargs you must cast the Method Reference to help the compiler choose
      * the correct overloaded toMethod method, Fx:
-     * <code>Method m = Fun.toMethod((Fun.With1ParamAndVoid<String[]>)new FunToMethodTest()::methodThatTakesAVarargParam);</code>
+     * <code>Method m = Fun.toMethod((Fun.With1ParamAndVoid&lt;String[]&gt;)new FunToMethodTest()::methodThatTakesAVarargParam);</code>
      *
      * </pre>
      * @see Fun
+     *
+     * @param methodRef a Method Reference, fx in the form of the double colon syntax like this 'MyClass::myAccessibleMethod', or 'myObject::myAccessibleMethod'.
+     * @param <DUMMY> a dummy generic to help the compiler choose the correct overloaded toMethod method.
+     * @return a {@link Method} instance that corresponds to the method reference. Please note, though, that the Method instance will *NOT* return the correct method name. Use Fun.getName for this purpose.
      */
     static <DUMMY> Method toMethod(Fun.With0ParamsAndVoid<DUMMY> methodRef) { return SerializedLambdaToMethod.createMethodFromSuperConsumer(methodRef); }
 
     /**
      * @see Fun#toMethod(With0ParamsAndVoid)
+     *
+     * @param methodRef a Method Reference, fx in the form of the double colon syntax like this 'MyClass::myAccessibleMethod', or 'myObject::myAccessibleMethod'.
+     * @param <T1> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @return a {@link Method} instance that corresponds to the method reference. Please note, though, that the Method instance will *NOT* return the correct method name. Use Fun.getName for this purpose.
      */
     static <T1> Method toMethod(Fun.With1ParamAndVoid<T1> methodRef) { return SerializedLambdaToMethod.createMethodFromSuperConsumer(methodRef); }
     /**
      * @see Fun#toMethod(With0ParamsAndVoid)
+     *
+     * @param methodRef a Method Reference, fx in the form of the double colon syntax like this 'MyClass::myAccessibleMethod', or 'myObject::myAccessibleMethod'.
+     * @param <T1> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T2> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @return a {@link Method} instance that corresponds to the method reference. Please note, though, that the Method instance will *NOT* return the correct method name. Use Fun.getName for this purpose.
      */
     static <T1, T2> Method toMethod(Fun.With2ParamsAndVoid<T1, T2> methodRef) { return SerializedLambdaToMethod.createMethodFromSuperConsumer(methodRef); }
     /**
      * @see Fun#toMethod(With0ParamsAndVoid)
+     *
+     * @param methodRef a Method Reference, fx in the form of the double colon syntax like this 'MyClass::myAccessibleMethod', or 'myObject::myAccessibleMethod'.
+     * @param <T1> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T2> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T3> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @return a {@link Method} instance that corresponds to the method reference. Please note, though, that the Method instance will *NOT* return the correct method name. Use Fun.getName for this purpose.
      */
     static <T1, T2, T3> Method toMethod(Fun.With3ParamsAndVoid<T1, T2, T3> methodRef) { return SerializedLambdaToMethod.createMethodFromSuperConsumer(methodRef); }
     /**
      * @see Fun#toMethod(With0ParamsAndVoid)
+     *
+     * @param methodRef a Method Reference, fx in the form of the double colon syntax like this 'MyClass::myAccessibleMethod', or 'myObject::myAccessibleMethod'.
+     * @param <T1> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T2> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T3> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T4> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @return a {@link Method} instance that corresponds to the method reference. Please note, though, that the Method instance will *NOT* return the correct method name. Use Fun.getName for this purpose.
      */
     static <T1, T2, T3, T4> Method toMethod(Fun.With4ParamsAndVoid<T1, T2, T3, T4> methodRef) { return SerializedLambdaToMethod.createMethodFromSuperConsumer(methodRef); }
     /**
      * @see Fun#toMethod(With0ParamsAndVoid)
+     *
+     * @param methodRef a Method Reference, fx in the form of the double colon syntax like this 'MyClass::myAccessibleMethod', or 'myObject::myAccessibleMethod'.
+     * @param <T1> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T2> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T3> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T4> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T5> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @return a {@link Method} instance that corresponds to the method reference. Please note, though, that the Method instance will *NOT* return the correct method name. Use Fun.getName for this purpose.
      */
     static <T1, T2, T3, T4, T5> Method toMethod(Fun.With5ParamsAndVoid<T1, T2, T3, T4, T5> methodRef) { return SerializedLambdaToMethod.createMethodFromSuperConsumer(methodRef); }
     /**
      * @see Fun#toMethod(With0ParamsAndVoid)
+     *
+     * @param methodRef a Method Reference, fx in the form of the double colon syntax like this 'MyClass::myAccessibleMethod', or 'myObject::myAccessibleMethod'.
+     * @param <T1> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T2> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T3> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T4> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T5> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T6> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @return a {@link Method} instance that corresponds to the method reference. Please note, though, that the Method instance will *NOT* return the correct method name. Use Fun.getName for this purpose.
      */
     static <T1, T2, T3, T4, T5, T6> Method toMethod(Fun.With6ParamsAndVoid<T1, T2, T3, T4, T5, T6> methodRef) { return SerializedLambdaToMethod.createMethodFromSuperConsumer(methodRef); }
     /**
      * @see Fun#toMethod(With0ParamsAndVoid)
+     *
+     * @param methodRef a Method Reference, fx in the form of the double colon syntax like this 'MyClass::myAccessibleMethod', or 'myObject::myAccessibleMethod'.
+     * @param <T1> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T2> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T3> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T4> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T5> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T6> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T7> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @return a {@link Method} instance that corresponds to the method reference. Please note, though, that the Method instance will *NOT* return the correct method name. Use Fun.getName for this purpose.
      */
     static <T1, T2, T3, T4, T5, T6, T7> Method toMethod(Fun.With7ParamsAndVoid<T1, T2, T3, T4, T5, T6, T7> methodRef) { return SerializedLambdaToMethod.createMethodFromSuperConsumer(methodRef); }
     /**
      * @see Fun#toMethod(With0ParamsAndVoid)
+     *
+     * @param methodRef a Method Reference, fx in the form of the double colon syntax like this 'MyClass::myAccessibleMethod', or 'myObject::myAccessibleMethod'.
+     * @param <T1> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T2> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T3> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T4> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T5> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T6> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T7> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T8> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @return a {@link Method} instance that corresponds to the method reference. Please note, though, that the Method instance will *NOT* return the correct method name. Use Fun.getName for this purpose.
      */
     static <T1, T2, T3, T4, T5, T6, T7, T8> Method toMethod(Fun.With8ParamsAndVoid<T1, T2, T3, T4, T5, T6, T7, T8> methodRef) { return SerializedLambdaToMethod.createMethodFromSuperConsumer(methodRef); }
     /**
      * @see Fun#toMethod(With0ParamsAndVoid)
+     *
+     * @param methodRef a Method Reference, fx in the form of the double colon syntax like this 'MyClass::myAccessibleMethod', or 'myObject::myAccessibleMethod'.
+     * @param <T1> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T2> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T3> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T4> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T5> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T6> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T7> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T8> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T9> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @return a {@link Method} instance that corresponds to the method reference. Please note, though, that the Method instance will *NOT* return the correct method name. Use Fun.getName for this purpose.
      */
     static <T1, T2, T3, T4, T5, T6, T7, T8, T9> Method toMethod(Fun.With9ParamsAndVoid<T1, T2, T3, T4, T5, T6, T7, T8, T9> methodRef) { return SerializedLambdaToMethod.createMethodFromSuperConsumer(methodRef); }
 
@@ -139,48 +215,120 @@ public interface Fun<RETURN> extends Serializable {
      * NB: An output a la 'lambda$16' can occur for corner cases, see  Holger, on SO: "The limitations are that it will print not very useful method references for lambda expressions (references to the synthetic method containing the lambda code)" https://stackoverflow.com/a/21879031/6095334
      * TODO: In those cases where a string a la 'lambda$16' is returned, i.e. the method name could not be resolved, one could perhaps use Gunnar Morlings approach as a fallback? https://in.relation.to/2016/04/14/emulating-property-literals-with-java-8-method-references/
      *
-     * @param consumer A Method Reference, typically in the form using the double colon syntax, fx String::isEmpty
-     * @param <DUMMY> A dummy generic value created to satisfy the compiler, which will otherwise get confused and be unable to choose the correct overloaded getName method,
+     * @param methodRef a Method Reference, fx in the form of the double colon syntax like this 'MyClass::myAccessibleMethod', or 'myObject::myAccessibleMethod'. A Method Reference, typically in the form using the double colon syntax, fx String::isEmpty
+     * @param <DUMMY> A dummy generic value created to satisfy the compiler, which will otherwise get confused and be unable to choose the correct overloaded getName method
      * @return the method name
      */
-    static <DUMMY> String getName(Fun.With0ParamsAndVoid<DUMMY> consumer) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(consumer); }
+    static <DUMMY> String getName(Fun.With0ParamsAndVoid<DUMMY>methodRef) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(methodRef); }
 
     /**
      * @see Fun#getName(With0ParamsAndVoid)
+     *
+     * @param methodRef a Method Reference, fx in the form of the double colon syntax like this 'MyClass::myAccessibleMethod', or 'myObject::myAccessibleMethod'.
+     * @param <T1> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @return the method name
      */
-    static <T1> String getName(Fun.With1ParamAndVoid<T1> consumer) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(consumer); }
+    static <T1> String getName(Fun.With1ParamAndVoid<T1>methodRef) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(methodRef); }
     /**
      * @see Fun#getName(With0ParamsAndVoid)
+     *
+     * @param methodRef a Method Reference, fx in the form of the double colon syntax like this 'MyClass::myAccessibleMethod', or 'myObject::myAccessibleMethod'.
+     * @param <T1> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T2> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @return the method name
      */
-    static <T1, T2> String getName(Fun.With2ParamsAndVoid<T1, T2> consumer) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(consumer); }
+    static <T1, T2> String getName(Fun.With2ParamsAndVoid<T1, T2>methodRef) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(methodRef); }
     /**
      * @see Fun#getName(With0ParamsAndVoid)
+     *
+     * @param methodRef a Method Reference, fx in the form of the double colon syntax like this 'MyClass::myAccessibleMethod', or 'myObject::myAccessibleMethod'.
+     * @param <T1> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T2> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T3> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @return the method name
      */
-    static <T1, T2, T3> String getName(Fun.With3ParamsAndVoid<T1, T2, T3> consumer) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(consumer); }
+    static <T1, T2, T3> String getName(Fun.With3ParamsAndVoid<T1, T2, T3>methodRef) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(methodRef); }
     /**
      * @see Fun#getName(With0ParamsAndVoid)
+     *
+     * @param methodRef a Method Reference, fx in the form of the double colon syntax like this 'MyClass::myAccessibleMethod', or 'myObject::myAccessibleMethod'.
+     * @param <T1> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T2> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T3> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T4> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @return the method name
      */
-    static <T1, T2, T3, T4> String getName(Fun.With4ParamsAndVoid<T1, T2, T3, T4> consumer) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(consumer); }
+    static <T1, T2, T3, T4> String getName(Fun.With4ParamsAndVoid<T1, T2, T3, T4>methodRef) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(methodRef); }
     /**
      * @see Fun#getName(With0ParamsAndVoid)
+     *
+     * @param methodRef a Method Reference, fx in the form of the double colon syntax like this 'MyClass::myAccessibleMethod', or 'myObject::myAccessibleMethod'.
+     * @param <T1> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T2> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T3> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T4> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T5> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @return the method name
      */
-    static <T1, T2, T3, T4, T5> String getName(Fun.With5ParamsAndVoid<T1, T2, T3, T4, T5> consumer) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(consumer); }
+    static <T1, T2, T3, T4, T5> String getName(Fun.With5ParamsAndVoid<T1, T2, T3, T4, T5>methodRef) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(methodRef); }
     /**
      * @see Fun#getName(With0ParamsAndVoid)
+     *
+     * @param methodRef a Method Reference, fx in the form of the double colon syntax like this 'MyClass::myAccessibleMethod', or 'myObject::myAccessibleMethod'.
+     * @param <T1> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T2> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T3> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T4> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T5> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T6> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @return the method name
      */
-    static <T1, T2, T3, T4, T5, T6> String getName(Fun.With6ParamsAndVoid<T1, T2, T3, T4, T5, T6> consumer) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(consumer); }
+    static <T1, T2, T3, T4, T5, T6> String getName(Fun.With6ParamsAndVoid<T1, T2, T3, T4, T5, T6>methodRef) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(methodRef); }
     /**
      * @see Fun#getName(With0ParamsAndVoid)
+     *
+     * @param methodRef a Method Reference, fx in the form of the double colon syntax like this 'MyClass::myAccessibleMethod', or 'myObject::myAccessibleMethod'.
+     * @param <T1> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T2> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T3> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T4> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T5> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T6> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T7> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @return the method name
      */
-    static <T1, T2, T3, T4, T5, T6, T7> String getName(Fun.With7ParamsAndVoid<T1, T2, T3, T4, T5, T6, T7> consumer) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(consumer); }
+    static <T1, T2, T3, T4, T5, T6, T7> String getName(Fun.With7ParamsAndVoid<T1, T2, T3, T4, T5, T6, T7>methodRef) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(methodRef); }
     /**
      * @see Fun#getName(With0ParamsAndVoid)
+     *
+     * @param methodRef a Method Reference, fx in the form of the double colon syntax like this 'MyClass::myAccessibleMethod', or 'myObject::myAccessibleMethod'.
+     * @param <T1> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T2> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T3> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T4> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T5> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T6> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T7> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T8> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @return the method name
      */
-    static <T1, T2, T3, T4, T5, T6, T7, T8> String getName(Fun.With8ParamsAndVoid<T1, T2, T3, T4, T5, T6, T7, T8> consumer) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(consumer); }
+    static <T1, T2, T3, T4, T5, T6, T7, T8> String getName(Fun.With8ParamsAndVoid<T1, T2, T3, T4, T5, T6, T7, T8>methodRef) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(methodRef); }
     /**
      * @see Fun#getName(With0ParamsAndVoid)
+     *
+     * @param methodRef a Method Reference, fx in the form of the double colon syntax like this 'MyClass::myAccessibleMethod', or 'myObject::myAccessibleMethod'.
+     * @param <T1> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T2> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T3> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T4> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T5> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T6> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T7> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T8> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @param <T9> When targeting an overloaded  method you must help the compiler choose the correct overloaded toMethod method by specifying the parameters and return value in generics.
+     * @return the method name
      */
-    static <T1, T2, T3, T4, T5, T6, T7, T8, T9> String getName(Fun.With9ParamsAndVoid<T1, T2, T3, T4, T5, T6, T7, T8, T9> consumer) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(consumer); }
+    static <T1, T2, T3, T4, T5, T6, T7, T8, T9> String getName(Fun.With9ParamsAndVoid<T1, T2, T3, T4, T5, T6, T7, T8, T9> methodRef) { return SerializedLambdaToMethod.createMethodNameFromSuperConsumer(methodRef); }
 
 
     //************************* NESTED STATIC INTERFACES FROM HERE ONWARDS. THE IDEA BEING TO CREATE A FLUENT API ****************************'

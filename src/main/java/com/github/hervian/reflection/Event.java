@@ -47,7 +47,8 @@ package com.github.hervian.reflection;
  *    this project will create an Event annnotation that would simplify above.
  *    Until that happens, using the Event class is the preferred way to create an'event'.
  * </pre>
- * @param <METHOD_REF>
+ * @param <RETURN> the return type
+ * @param <METHOD_REF> the method reference
  * @author Anders Granau Høfft
  */
 public abstract class Event<RETURN, METHOD_REF extends Fun<RETURN>> {

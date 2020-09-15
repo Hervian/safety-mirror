@@ -165,10 +165,17 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
+        /**
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws Exception if one of the invoked functions throws an Exception
+         */
         public DelegateInvocationResult<RETURN> invoke() throws Exception {
             return super.invoke();
         }
 
+        /**
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         */
         public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions() {
             return super.invokeAndAggregateExceptions();
         }
@@ -185,10 +192,17 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
+        /**
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws Exception if one of the invoked functions throws an Exception
+         */
         public DelegateInvocationResult<Void> invoke() throws Exception {
             return super.invoke();
         }
 
+        /**
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         */
         public DelegateInvocationResult<Void> invokeAndAggregateExceptions() {
             return super.invokeAndAggregateExceptions();
         }
@@ -207,9 +221,8 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
         }
 
         /**
-         *
-         * @param param1
-         * @return the return value of the function being invoked
+         * @param param1 the first argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
          * @throws NullPointerException if one or more of the arguments are null
          * @throws Exception if one of the invoked functions throws an Exception
          */
@@ -218,7 +231,7 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
         }
 
         /**
-         * @param param1
+         * @param param1 the first argument to the underlying method(s)
          * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
          * @throws NullPointerException if one or more of the arguments are null
          */
@@ -237,10 +250,21 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         * @throws Exception if one of the invoked functions throws an Exception
+         */
         public DelegateInvocationResult<Void> invoke(@NonNull @NotNull PARAM1 param1) throws Exception {
             return super.invoke(param1);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         public DelegateInvocationResult<Void> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1) {
             return super.invokeAndAggregateExceptions(param1);
         }
@@ -258,10 +282,23 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         * @throws Exception if one of the invoked functions throws an Exception
+         */
         public DelegateInvocationResult<RETURN> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2) throws Exception {
             return super.invoke(param1, param2);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2) {
             return super.invokeAndAggregateExceptions(param1, param2);
         }
@@ -277,10 +314,23 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         * @throws Exception if one of the invoked functions throws an Exception
+         */
         public DelegateInvocationResult<Void> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2) throws Exception {
             return super.invoke(param1, param2);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         public DelegateInvocationResult<Void> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2) {
             return super.invokeAndAggregateExceptions(param1, param2);
         }
@@ -299,10 +349,25 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
         }
 
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         * @throws Exception if one of the invoked functions throws an Exception
+         */
         public DelegateInvocationResult<RETURN> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3) throws Exception {
             return super.invoke(param1, param2, param3);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3) {
             return super.invokeAndAggregateExceptions(param1, param2, param3);
         }
@@ -318,10 +383,25 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         * @throws Exception if one of the invoked functions throws an Exception
+         */
         public DelegateInvocationResult<Void> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3) throws Exception {
             return super.invoke(param1, param2, param3);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         public DelegateInvocationResult<Void> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3) {
             return super.invokeAndAggregateExceptions(param1, param2, param3);
         }
@@ -339,10 +419,27 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @param param4 the fourth argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         * @throws Exception if one of the invoked functions throws an Exception
+         */
         public DelegateInvocationResult<RETURN> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4) throws Exception {
             return super.invoke(param1, param2, param3, param4);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @param param4 the fourth argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4) {
             return super.invokeAndAggregateExceptions(param1, param2, param3, param4);
         }
@@ -358,10 +455,27 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @param param4 the fourth argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         * @throws Exception if one of the invoked functions throws an Exception
+         */
         public DelegateInvocationResult<Void> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4) throws Exception {
             return super.invoke(param1, param2, param3, param4);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @param param4 the fourth argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         public DelegateInvocationResult<Void> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4) {
             return super.invokeAndAggregateExceptions(param1, param2, param3, param4);
         }
@@ -379,10 +493,29 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @param param4 the fourth argument to the underlying method(s)
+         * @param param5 the fifth argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         * @throws Exception if one of the invoked functions throws an Exception
+         */
         public DelegateInvocationResult<RETURN> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5) throws Exception {
             return super.invoke(param1, param2, param3, param4, param5);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @param param4 the fourth argument to the underlying method(s)
+         * @param param5 the fifth argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5) {
             return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5);
         }
@@ -398,10 +531,29 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @param param4 the fourth argument to the underlying method(s)
+         * @param param5 the fifth argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         * @throws Exception if one of the invoked functions throws an Exception
+         */
         public DelegateInvocationResult<Void> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5) throws Exception {
             return super.invoke(param1, param2, param3, param4, param5);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @param param4 the fourth argument to the underlying method(s)
+         * @param param5 the fifth argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         public DelegateInvocationResult<Void> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5) {
             return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5);
         }
@@ -419,10 +571,31 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @param param4 the fourth argument to the underlying method(s)
+         * @param param5 the fifth argument to the underlying method(s)
+         * @param param6 the sixth argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         * @throws Exception if one of the invoked functions throws an Exception
+         */
         public DelegateInvocationResult<RETURN> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6) throws Exception {
             return super.invoke(param1, param2, param3, param4, param5, param6);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @param param4 the fourth argument to the underlying method(s)
+         * @param param5 the fifth argument to the underlying method(s)
+         * @param param6 the sixth argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6) {
             return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5, param6);
         }
@@ -438,10 +611,31 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @param param4 the fourth argument to the underlying method(s)
+         * @param param5 the fifth argument to the underlying method(s)
+         * @param param6 the sixth argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         * @throws Exception if one of the invoked functions throws an Exception
+         */
         public DelegateInvocationResult<Void> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6) throws Exception {
             return super.invoke(param1, param2, param3, param4, param5, param6);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @param param4 the fourth argument to the underlying method(s)
+         * @param param5 the fifth argument to the underlying method(s)
+         * @param param6 the sixth argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         public DelegateInvocationResult<Void> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6) {
             return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5, param6);
         }
@@ -459,10 +653,33 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @param param4 the fourth argument to the underlying method(s)
+         * @param param5 the fifth argument to the underlying method(s)
+         * @param param6 the sixth argument to the underlying method(s)
+         * @param param7 the seventh argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         * @throws Exception if one of the invoked functions throws an Exception
+         */
         public DelegateInvocationResult<RETURN> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7) throws Exception {
             return super.invoke(param1, param2, param3, param4, param5, param6, param7);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @param param4 the fourth argument to the underlying method(s)
+         * @param param5 the fifth argument to the underlying method(s)
+         * @param param6 the sixth argument to the underlying method(s)
+         * @param param7 the seventh argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7) {
             return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5, param6, param7);
         }
@@ -478,10 +695,33 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @param param4 the fourth argument to the underlying method(s)
+         * @param param5 the fifth argument to the underlying method(s)
+         * @param param6 the sixth argument to the underlying method(s)
+         * @param param7 the seventh argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         * @throws Exception if one of the invoked functions throws an Exception
+         */
         public DelegateInvocationResult<Void> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7) throws Exception {
             return super.invoke(param1, param2, param3, param4, param5, param6, param7);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @param param4 the fourth argument to the underlying method(s)
+         * @param param5 the fifth argument to the underlying method(s)
+         * @param param6 the sixth argument to the underlying method(s)
+         * @param param7 the seventh argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         public DelegateInvocationResult<Void> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7) {
             return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5, param6, param7);
         }
@@ -499,10 +739,35 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @param param4 the fourth argument to the underlying method(s)
+         * @param param5 the fifth argument to the underlying method(s)
+         * @param param6 the sixth argument to the underlying method(s)
+         * @param param7 the seventh argument to the underlying method(s)
+         * @param param8 the eighth argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         * @throws Exception if one of the invoked functions throws an Exception
+         */
         public DelegateInvocationResult<RETURN> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8) throws Exception {
             return super.invoke(param1, param2, param3, param4, param5, param6, param7, param8);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @param param4 the fourth argument to the underlying method(s)
+         * @param param5 the fifth argument to the underlying method(s)
+         * @param param6 the sixth argument to the underlying method(s)
+         * @param param7 the seventh argument to the underlying method(s)
+         * @param param8 the eighth argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8) {
             return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5, param6, param7, param8);
         }
@@ -518,10 +783,35 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @param param4 the fourth argument to the underlying method(s)
+         * @param param5 the fifth argument to the underlying method(s)
+         * @param param6 the sixth argument to the underlying method(s)
+         * @param param7 the seventh argument to the underlying method(s)
+         * @param param8 the eighth argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         * @throws Exception if one of the invoked functions throws an Exception
+         */
         public DelegateInvocationResult<Void> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8) throws Exception {
             return super.invoke(param1, param2, param3, param4, param5, param6, param7, param8);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @param param4 the fourth argument to the underlying method(s)
+         * @param param5 the fifth argument to the underlying method(s)
+         * @param param6 the sixth argument to the underlying method(s)
+         * @param param7 the seventh argument to the underlying method(s)
+         * @param param8 the eighth argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         public DelegateInvocationResult<Void> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8) {
             return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5, param6, param7, param8);
         }
@@ -539,10 +829,37 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @param param4 the fourth argument to the underlying method(s)
+         * @param param5 the fifth argument to the underlying method(s)
+         * @param param6 the sixth argument to the underlying method(s)
+         * @param param7 the seventh argument to the underlying method(s)
+         * @param param8 the eighth argument to the underlying method(s)
+         * @param param9 the ninth argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         * @throws Exception if one of the invoked functions throws an Exception
+         */
         public DelegateInvocationResult<RETURN> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8, @NonNull @NotNull PARAM9 param9) throws Exception {
             return super.invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @param param4 the fourth argument to the underlying method(s)
+         * @param param5 the fifth argument to the underlying method(s)
+         * @param param6 the sixth argument to the underlying method(s)
+         * @param param7 the seventh argument to the underlying method(s)
+         * @param param8 the eighth argument to the underlying method(s)
+         * @param param9 the ninth argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         public DelegateInvocationResult<RETURN> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8, @NonNull @NotNull PARAM9 param9) {
             return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5, param6, param7, param8, param9);
         }
@@ -558,10 +875,37 @@ public abstract class Delegate<RETURN, METHOD_REF extends Fun<RETURN>> {
             super(methodRefs);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @param param4 the fourth argument to the underlying method(s)
+         * @param param5 the fifth argument to the underlying method(s)
+         * @param param6 the sixth argument to the underlying method(s)
+         * @param param7 the seventh argument to the underlying method(s)
+         * @param param8 the eighth argument to the underlying method(s)
+         * @param param9 the ninth argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         * @throws Exception if one of the invoked functions throws an Exception
+         */
         public DelegateInvocationResult<Void> invoke(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8, @NonNull @NotNull PARAM9 param9) throws Exception {
             return super.invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9);
         }
 
+        /**
+         * @param param1 the first argument to the underlying method(s)
+         * @param param2 the second argument to the underlying method(s)
+         * @param param3 the third argument to the underlying method(s)
+         * @param param4 the fourth argument to the underlying method(s)
+         * @param param5 the fifth argument to the underlying method(s)
+         * @param param6 the sixth argument to the underlying method(s)
+         * @param param7 the seventh argument to the underlying method(s)
+         * @param param8 the eighth argument to the underlying method(s)
+         * @param param9 the ninth argument to the underlying method(s)
+         * @return a {@link DelegateInvocationResult} containing all the results of the invoked functions
+         * @throws NullPointerException if one or more of the arguments are null
+         */
         public DelegateInvocationResult<Void> invokeAndAggregateExceptions(@NonNull @NotNull PARAM1 param1, @NonNull @NotNull PARAM2 param2, @NonNull @NotNull PARAM3 param3, @NonNull @NotNull PARAM4 param4, @NonNull @NotNull PARAM5 param5, @NonNull @NotNull PARAM6 param6, @NonNull @NotNull PARAM7 param7, @NonNull @NotNull PARAM8 param8, @NonNull @NotNull PARAM9 param9) {
             return super.invokeAndAggregateExceptions(param1, param2, param3, param4, param5, param6, param7, param8, param9);
         }
