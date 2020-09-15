@@ -7,7 +7,7 @@ Available in [Maven Central](https://search.maven.org/search?q=g:%22com.github.h
 <dependency>
   <groupId>com.github.hervian</groupId>
   <artifactId>safety-mirror</artifactId>
-  <version>3.0.0 (or see Maven Central or mvnrepository.com for newest version)</version>
+  <version>4.0.1 (or see Maven Central or mvnrepository.com for newest version)</version>
 </dependency>
 ```
 
