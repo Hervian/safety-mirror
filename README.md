@@ -5,7 +5,7 @@ Fun with Delegates, Events and type safe [Method](https://docs.oracle.com/javase
 [Releases](#releases)  
 [Cheat sheet of features](#cheat-sheet-of-features)  
 [Requirements](#requirements)  
-[Java 9+ setup guide](#java-9+-setup-guide)  
+[Java 9 setup guide](#java-9-setup-guide)  
 [Details](details)  
 [Known limitations and workarounds](#known-limitations-and-workarounds)  
 [Future work](#future-work)  
@@ -80,7 +80,7 @@ If you wish to use this project with *Java 8* you must clone the project and 1) 
 such that source and target is set to 1.8 (instead of 1.9) and 2) delete the  module-info.java file.
 After this you should be able to build using JDK-8.
 
-## Java 9+ setup guide
+## Java 9 setup guide
 This project is built with JDK9 and is modularized in that in contains a *module-info.java* file.
 The module's name is `safety.mirror`.  
 To make the library work, you must both add the *safety.mirror* module and allow it to perform reflection on your code.  
