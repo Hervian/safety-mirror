@@ -5,7 +5,7 @@ Fun with Delegates, Events and type safe [Method](https://docs.oracle.com/javase
 [Releases](#releases)  
 [Cheat sheet of features](#cheat-sheet-of-features)  
 [Requirements](#requirements)  
-[Java 9+ setup guide](#java-9+-setup-guide)
+[Java 9+ setup guide](#java-9+-setup-guide)  
 [Details](details)  
 [Known limitations and workarounds](#known-limitations-and-workarounds)  
 [Future work](#future-work)  
