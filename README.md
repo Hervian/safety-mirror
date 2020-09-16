@@ -1,6 +1,16 @@
 # safety-mirror
 Fun with Delegates, Events and type safe [Method](https://docs.oracle.com/javase/9/docs/api/java/lang/reflect/Method.html) creation.
 
+## Table of Contents  
+[Releases](releases)  
+[Cheat sheet of features](cheat-sheet-of-features)  
+[Requirements](Requirements)  
+[Java 9+ setup guide](Java-9+-setup-guide)
+[Details](details)  
+[Known limitations and workarounds](known-limitations-and-workarounds)  
+[Future work](future-work)  
+[Related projects](related-projects)  
+
 ## Releases
 Available in [Maven Central](https://search.maven.org/search?q=g:%22com.github.hervian%22%3D%20AND%20a:%22safety-mirror%22%3D) and [mvnrepository.com](https://mvnrepository.com/artifact/com.github.hervian/safety-mirror):
 ```
@@ -14,8 +24,7 @@ Available in [Maven Central](https://search.maven.org/search?q=g:%22com.github.h
 Requires **Java 9** or above.
 See requirements section if you need to use this library with *Java 8*.
 
-## Usage
-### Cheat sheet of features
+## Cheat sheet of features
 * [Fun and friends](#fun-and-friends-no-more-functional-interfaces):  
         `Fun.With0Params<String> myFunctionField = "   hello world   "::trim;`  
         `Fun.With2Params<Boolean, Object, Object> equals = Objects::equals;`  
@@ -65,13 +74,13 @@ It is all type safe: you will get compile time errors if the Method Reference's 
         Method m5 = Fun.<String>toMethod(Class::forName); // to get overloaded method you must specify parameters in generics
         Method m6 = Fun.toMethod(this::toString); //Works with inherited methods
 
-### Requirements
+## Requirements
 Requires **Java 9** or above.  
 If you wish to use this project with *Java 8* you must clone the project and 1) change the pom.xml's properties section 
 such that source and target is set to 1.8 (instead of 1.9) and 2) delete the  module-info.java file.
 After this you should be able to build using JDK-8.
 
-### Java 9+ setup guide...
+## Java 9+ setup guide
 This project is built with JDK9 and is modularized in that in contains a *module-info.java* file.
 The module's name is `safety.mirror`.  
 To make the library work, you must both add the *safety.mirror* module and allow it to perform reflection on your code.  
@@ -232,14 +241,14 @@ to one of the overloaded toMethod methods in the Fun class. This will provide yo
 Notice that you have to provide the method parameters in generics under certain circumstances 
 (When the method is overloaded, or if the method has a varargs parameter).    
 
-### Known limitations and workarounds
-#### Nulls
+## Known limitations and workarounds
+### Nulls
 Please be aware that all parameters of all the invoke methods (of both the Fun types and Delegate types) 
 are annotated `NonNull`/`@NotNull` and that runtime null checks will make sure it is respected. - in other words:
 don't use nulls. Create Optionals for your signature if nulls oif you have the need. See details on why this is in below 
 notes on primitives.  
 
-#### Varargs
+### Varargs
 * The static overloaded Fun.toMethod methods cannot compile (out of the box) when the target method contains varargs.
 To solve this, one must help the compiler by explicit casting:  
 `Method m = Fun.toMethod((Fun.With1ParamAndVoid<String[]>)new FunToMethodTest()::methodThatTakesAVarargParam); //When varargs is involved you are unfortunately forced to cast to avoid an "Ambiguous method call" error.`    
@@ -255,7 +264,7 @@ The reason is that the compiler can't find the correct overloaded method (`Fun.W
 This is the compiler error:    
 `Ambiguous method call. Both toMethod(With0ParamsAndVoid<Object>) in Fun and toMethod(With1ParamAndVoid<Object>) in Fun match`
 
-#### Primitive types
+### Primitive types
 Generics only allow Objects/Reference types, not primitive types. (This may change once Project Valhalla is completed.)   
 You can, however, pass any signature containing primitive params to a Fun type that has the corresponding boxed types.   
 Fx, if you defined the type `Fun.With1Param<Integer>`, then you can successfully assign a Method Reference to a method whose single param is primitive `int`.
@@ -266,6 +275,9 @@ it's generics specify an Integer parameter, and Integer may be null.) A NullPoin
 To tackle this the API have annotated all parameters of invocation methods (I.e. both the Fun types and the Delegate types)
 with various NonNull / NotNull annotations (Remember to activate your IDEs annotation processor and nullness checks).   
 Further, all invoke methods of the Delegate object has a null check and will throw a NullPointerException when passing one or more nulls.
+
+## Future work
+I would like to add functions, events and delegates to the Kotlin programming language, i.e. add some syntactic sugar on top of this library to simplify usage.
 
 ## Related projects
 * [lambda-factory](https://github.com/Hervian/lambda-factory): a fast alternative to [Reflection](https://docs.oracle.com/javase/9/docs/api/java/lang/reflect/package-summary.html-based) based method invocation.
