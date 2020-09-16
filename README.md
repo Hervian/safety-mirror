@@ -2,14 +2,14 @@
 Fun with Delegates, Events and type safe [Method](https://docs.oracle.com/javase/9/docs/api/java/lang/reflect/Method.html) creation.
 
 ## Table of Contents  
-[Releases](releases)  
-[Cheat sheet of features](cheat-sheet-of-features)  
-[Requirements](Requirements)  
-[Java 9+ setup guide](Java-9+-setup-guide)
+[Releases](#releases)  
+[Cheat sheet of features](#cheat-sheet-of-features)  
+[Requirements](#requirements)  
+[Java 9+ setup guide](#java-9+-setup-guide)
 [Details](details)  
-[Known limitations and workarounds](known-limitations-and-workarounds)  
-[Future work](future-work)  
-[Related projects](related-projects)  
+[Known limitations and workarounds](#known-limitations-and-workarounds)  
+[Future work](#future-work)  
+[Related projects](#related-projects)  
 
 ## Releases
 Available in [Maven Central](https://search.maven.org/search?q=g:%22com.github.hervian%22%3D%20AND%20a:%22safety-mirror%22%3D) and [mvnrepository.com](https://mvnrepository.com/artifact/com.github.hervian/safety-mirror):
